@@ -827,50 +827,6 @@ header {
     backdrop-filter: blur(5px);
 }
 
-/* Portfolio Section */
-.portfolio-scroll {
-    display: flex;
-    gap: 30px;
-    overflow-x: auto;
-    padding-bottom: 40px;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 210, 255, 0.3) rgba(255, 255, 255, 0.05);
-}
-
-.portfolio-scroll::-webkit-scrollbar {
-    height: 8px;
-}
-
-.portfolio-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-}
-
-.portfolio-scroll::-webkit-scrollbar-thumb {
-    background: rgba(0, 210, 255, 0.3);
-    border-radius: 10px;
-}
-
-.portfolio-card {
-    position: relative;
-    min-width: 400px;
-    height: 500px;
-    border-radius: 20px;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.4s;
-}
-
-.portfolio-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    border-color: rgba(0, 210, 255, 0.3);
-}
-
 /* Pricing */
 .pricing-card {
     background: rgba(255, 255, 255, 0.02);
