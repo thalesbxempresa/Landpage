@@ -172,7 +172,7 @@ function App() {
 
             {/* NEW: Fashion */}
             <div className="portfolio-card">
-              <img src="C:/Users/thale/.gemini/antigravity/brain/9f57e23c-30b0-48e3-9e2c-75677a545a9f/fashion_store_social.png" alt="Fashion" />
+              <img src="/assets/images/fashion.png" alt="Fashion" />
               <div className="portfolio-info">
                 <h3>Moda & Varejo</h3>
                 <p>E-commerce Escalável</p>
@@ -189,7 +189,7 @@ function App() {
 
             {/* NEW: Law */}
             <div className="portfolio-card">
-              <img src="C:/Users/thale/.gemini/antigravity/brain/9f57e23c-30b0-48e3-9e2c-75677a545a9f/lawyer_office_social.png" alt="Law" />
+              <img src="/assets/images/lawyer.png" alt="Law" />
               <div className="portfolio-info">
                 <h3>Advocacia</h3>
                 <p>Autoridade Digital</p>
@@ -206,7 +206,7 @@ function App() {
 
             {/* NEW: Barber */}
             <div className="portfolio-card">
-              <img src="C:/Users/thale/.gemini/antigravity/brain/9f57e23c-30b0-48e3-9e2c-75677a545a9f/barber_shop_social.png" alt="Barber" />
+              <img src="/assets/images/barber.png" alt="Barber" />
               <div className="portfolio-info">
                 <h3>Barbearia</h3>
                 <p>Agenda Lotada</p>

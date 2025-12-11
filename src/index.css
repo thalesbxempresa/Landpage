@@ -965,32 +965,32 @@ header {
 
     /* Layout & Spacing */
     .container {
-        padding: 0 24px;
+        padding: 0 20px;
     }
 
     .section-padding {
-        padding: 80px 0;
+        padding: 50px 0;
     }
 
     /* Typography */
     h1 {
-        font-size: 2.8rem;
+        font-size: 2rem;
         letter-spacing: -1px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     h2 {
-        font-size: 2.2rem;
+        font-size: 1.7rem;
     }
 
     p.lead {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
     }
 
     /* Navigation */
     header {
         padding: 15px 0;
-        background: rgba(5, 10, 16, 0.8);
+        background: rgba(5, 10, 16, 0.95);
         backdrop-filter: blur(15px);
     }
 
@@ -1016,44 +1016,40 @@ header {
     /* Hero Section */
     .hero-section {
         min-height: auto;
-        padding-top: 100px;
-        /* More space for header */
-        padding-bottom: 60px;
-        /* flex-direction: column;  <-- Removed this as it doesn't affect grid children directly */
+        padding-top: 80px;
+        padding-bottom: 40px;
     }
 
     .hero-grid {
         grid-template-columns: 1fr;
-        /* Force stack */
-        gap: 50px;
+        gap: 30px;
         text-align: center;
         justify-items: center;
-        /* Center the phone mockup */
     }
 
     .hero-text {
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* Center text content */
     }
 
     .hero-text h1 {
-        font-size: 2.5rem;
-        line-height: 1.1;
+        font-size: 2.1rem;
+        line-height: 1.2;
     }
 
     .hero-text .lead {
-        font-size: 1rem;
-        padding: 0 10px;
+        font-size: 0.95rem;
+        padding: 0 15px;
         color: var(--text-muted);
     }
 
     .hero-buttons {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
         padding: 0 20px;
+        width: 100%;
     }
 
     .hero-buttons .btn-cta,
@@ -1065,83 +1061,84 @@ header {
     }
 
     /* Visual Adjustments */
-    /* Visual Adjustments */
     .visual-container {
-        height: 420px;
-        /* More breathing room */
+        height: 300px;
         order: 2;
         perspective: none;
-        margin-top: 20px;
+        margin-top: 10px;
+        width: 100%;
     }
 
     .phone-mockup-3d {
-        transform: scale(0.65) !important;
-        /* Smaller phone to fit comfortably */
+        transform: scale(0.6);
         transform-origin: center center;
         margin-left: 0;
-        /* Remove offset since we are centering */
     }
 
     /* Floating Stats - Adjust for phone */
     .stat-card-floating {
-        left: -20px;
-        bottom: 40px;
-        transform: scale(0.85);
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+        bottom: 20px;
         white-space: nowrap;
-        /* Prevent text wrapping */
         z-index: 20;
     }
 
     .stat-item:hover {
         transform: scale(1.05);
-        /* Simple scale on mobile hover */
-    }
-
-    .stat-floating-1 {
-        top: 0;
-        right: 0;
-    }
-
-    .stat-floating-2 {
-        bottom: 10px;
-        left: 0;
     }
 
     /* Services & Pricing */
     .card-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 20px;
     }
 
-    /* Portfolio */
+    /* Portfolio - FORCE ROW LAYOUT */
     .portfolio-scroll {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
         padding-bottom: 20px;
-        margin: 0 -24px;
-        padding: 0 24px 20px 24px;
+        margin: 0 -20px;
+        padding: 0 20px 20px 20px;
+        gap: 15px;
+        scroll-snap-type: x mandatory;
     }
 
     .portfolio-card {
         height: 350px;
-        /* Reduced height for mobile screens */
-        min-width: 200px;
-        /* Allow smaller minimum width */
+        min-width: 240px;
+        width: 240px;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+        /* Ensure it's not full width */
+        max-width: 80vw;
+    }
+
+    .portfolio-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 }
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 2.2rem;
+        font-size: 1.9rem;
     }
 
     .visual-container {
-        height: 250px;
+        height: 260px;
     }
 
     .stat-item {
-        padding: 15px;
+        padding: 12px;
     }
 
     .stat-value {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 }
