@@ -16,12 +16,12 @@ function App() {
 
           {/* Desktop Nav */}
           <nav className="nav-links">
-            <a href="#solutions">Soluções</a>
+            <a href="#solutions">Serviços</a>
             <a href="#cases">Projetos</a>
-            <a href="#plans">Planos</a>
+            <a href="#plans">Pacotes</a>
           </nav>
 
-          <a href="https://wa.me/5522998994412" className="btn-cta text-cta">Falar com Especialista</a>
+          <a href="https://wa.me/5522998994412" className="btn-cta text-cta">Falar no WhatsApp</a>
 
           {/* Mobile Menu Button */}
           <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Menu">
@@ -31,10 +31,10 @@ function App() {
 
         {/* Mobile Nav Overlay */}
         <div className={`mobile-nav ${isMenuOpen ? 'active' : ''}`}>
-          <a href="#solutions" onClick={toggleMenu}>Soluções</a>
+          <a href="#solutions" onClick={toggleMenu}>Serviços</a>
           <a href="#cases" onClick={toggleMenu}>Projetos</a>
-          <a href="#plans" onClick={toggleMenu}>Planos</a>
-          <a href="https://wa.me/5522998994412" className="btn-cta mobile-cta" onClick={toggleMenu}>Falar com Especialista</a>
+          <a href="#plans" onClick={toggleMenu}>Pacotes</a>
+          <a href="https://wa.me/5522998994412" className="btn-cta mobile-cta" onClick={toggleMenu}>Falar no WhatsApp</a>
         </div>
       </header>
 
@@ -43,13 +43,13 @@ function App() {
         <div className="hero-glow"></div>
         <div className="container hero-grid">
           <div className="hero-text">
-            <h1>Liderança Digital <br />para o seu Negócio.</h1>
+            <h1>Imagens e vídeos com IA <br />para destacar sua marca</h1>
             <p className="lead">
-              Estratégias de anúncios, design e vendas para empresas que querem dominar o mercado de Macaé.
+              Criação de imagens realistas, vídeos curtos e estruturas digitais usando inteligência artificial para negócios e projetos digitais.
             </p>
             <div style={{ marginTop: '40px' }} className="hero-buttons">
-              <a href="https://wa.me/5522998994412" className="btn-cta">Começar Agora</a>
-              <a href="#solutions" className="btn-outline">Ver Soluções</a>
+              <a href="#plans" className="btn-cta">Ver Pacotes</a>
+              <a href="https://wa.me/5522998994412" className="btn-outline">Falar no WhatsApp</a>
             </div>
           </div>
 
@@ -127,25 +127,30 @@ function App() {
       <section id="solutions" className="section-padding">
         <div className="container">
           <div className="section-head">
-            <h2>Soluções Práticas</h2>
-            <p className="lead" style={{ margin: '0 auto' }}>Tecnologia e criatividade focadas em vender mais.</p>
+            <h2>Serviços</h2>
+            <p className="lead" style={{ margin: '0 auto' }}>Criação com inteligência artificial e desenvolvimento digital.</p>
           </div>
 
           <div className="card-grid">
             <div className="feature-card">
-              <div className="icon-box"><i className="fas fa-bullseye"></i></div>
-              <h3>Anúncios Online</h3>
-              <p style={{ color: '#888' }}>Colocamos sua empresa no topo do Google e Instagram para atrair clientes reais.</p>
+              <div className="icon-box"><i className="fas fa-image"></i></div>
+              <h3>Pacotes de Imagens com IA</h3>
+              <p style={{ color: '#888' }}>Criação de imagens realistas e criativas com inteligência artificial para redes sociais, anúncios e projetos digitais.</p>
             </div>
             <div className="feature-card">
-              <div className="icon-box"><i className="fas fa-layer-group"></i></div>
-              <h3>Sites Profissionais</h3>
-              <p style={{ color: '#888' }}>Páginas rápidas e modernas que transformam visitantes em compradores.</p>
+              <div className="icon-box"><i className="fas fa-video"></i></div>
+              <h3>Pacotes de Vídeos com IA</h3>
+              <p style={{ color: '#888' }}>Vídeos curtos e realistas com IA para redes sociais, anúncios e apresentações.</p>
             </div>
             <div className="feature-card">
-              <div className="icon-box"><i className="fas fa-brain"></i></div>
-              <h3>Atendimento Automático</h3>
-              <p style={{ color: '#888' }}>Sistemas que respondem clientes no WhatsApp instantaneamente, 24h por dia.</p>
+              <div className="icon-box"><i className="fas fa-file-code"></i></div>
+              <h3>Landing Pages</h3>
+              <p style={{ color: '#888' }}>Criação de landing pages modernas, rápidas e focadas em conversão.</p>
+            </div>
+            <div className="feature-card">
+              <div className="icon-box"><i className="fas fa-cogs"></i></div>
+              <h3>Sistemas com Automação</h3>
+              <p style={{ color: '#888' }}>Desenvolvimento de sistemas completos com automação, integração e fluxos inteligentes.</p>
             </div>
           </div>
         </div>
@@ -157,7 +162,7 @@ function App() {
           <div className="section-head text-left" style={{ textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
             <div>
               <h2>Nossos Clientes</h2>
-              <p className="lead">Resultados reais em Macaé.</p>
+              <p className="lead">Resultados reais para negócios locais de Macaé.</p>
             </div>
           </div>
 
@@ -228,50 +233,145 @@ function App() {
       <section id="plans" className="section-padding">
         <div className="container">
           <div className="section-head">
-            <h2>Investimento</h2>
+            <h2>Pacotes e Investimento</h2>
+            <p className="lead" style={{ margin: '0 auto' }}>Escolha o pacote ideal para o seu projeto.</p>
           </div>
 
-          <div className="card-grid">
-            <div className="pricing-card">
-              <h3>Essencial</h3>
-              <div className="price-tag">900 <span>/mês</span></div>
-              <ul className="price-features">
-                <li>Gestão de 1 Canal (Insta ou Google)</li>
-                <li>Relatório Mensal</li>
-                <li>Suporte WhatsApp</li>
-              </ul>
-              <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Começar</a>
-            </div>
+          {/* Pacotes de Imagens */}
+          <div style={{ marginBottom: '60px' }}>
+            <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', textAlign: 'center' }}>Pacotes de Imagens com IA</h3>
+            <div className="card-grid">
+              <div className="pricing-card">
+                <h3>10 Imagens</h3>
+                <div className="price-tag">R$ 150<span></span></div>
+                <ul className="price-features">
+                  <li>10 imagens realistas com IA</li>
+                  <li>Alta qualidade</li>
+                  <li>Entrega rápida</li>
+                  <li>Revisões incluídas</li>
+                </ul>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Contratar</a>
+              </div>
 
-            <div className="pricing-card premium">
-              <span style={{ color: '#0072FF', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Recomendado</span>
-              <h3 style={{ marginTop: '10px' }}>Aceleração</h3>
-              <div className="price-tag">1.500 <span>/mês</span></div>
-              <ul className="price-features">
-                <li>Gestão Google + Instagram</li>
-                <li>Página de Vendas Inclusa</li>
-                <li>Textos que Vendem (Copy)</li>
-                <li>Suporte Prioritário</li>
-              </ul>
-              <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Começar Agora</a>
-            </div>
+              <div className="pricing-card premium">
+                <span style={{ color: '#0072FF', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Melhor Custo-Benefício</span>
+                <h3 style={{ marginTop: '10px' }}>20 Imagens</h3>
+                <div className="price-tag">R$ 200<span></span></div>
+                <ul className="price-features">
+                  <li>20 imagens realistas com IA</li>
+                  <li>Alta qualidade</li>
+                  <li>Entrega rápida</li>
+                  <li>Revisões incluídas</li>
+                  <li>Economia de R$ 100</li>
+                </ul>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Contratar Agora</a>
+              </div>
 
-            <div className="pricing-card">
-              <h3>Personalizado</h3>
-              <div className="price-tag">A Combinar</div>
-              <ul className="price-features">
-                <li>Equipe Dedicada</li>
-                <li>Painel em Tempo Real</li>
-                <li>Consultoria de Estratégia</li>
-              </ul>
-              <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Cotar</a>
+              <div className="pricing-card">
+                <h3>Plano Mensal</h3>
+                <div className="price-tag">A Combinar</div>
+                <ul className="price-features">
+                  <li>Volume personalizado</li>
+                  <li>Melhor custo-benefício</li>
+                  <li>Prioridade na entrega</li>
+                  <li>Suporte dedicado</li>
+                </ul>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Consultar</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Pacotes de Vídeos */}
+          <div style={{ marginBottom: '60px' }}>
+            <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', textAlign: 'center' }}>Pacotes de Vídeos com IA (até 15s)</h3>
+            <div className="card-grid">
+              <div className="pricing-card">
+                <h3>5 Vídeos</h3>
+                <div className="price-tag">R$ 200<span></span></div>
+                <ul className="price-features">
+                  <li>5 vídeos realistas até 15s</li>
+                  <li>Alta qualidade</li>
+                  <li>Formato para redes sociais</li>
+                  <li>Revisões incluídas</li>
+                </ul>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Contratar</a>
+              </div>
+
+              <div className="pricing-card premium">
+                <span style={{ color: '#0072FF', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Recomendado</span>
+                <h3 style={{ marginTop: '10px' }}>10 Vídeos</h3>
+                <div className="price-tag">R$ 300<span></span></div>
+                <ul className="price-features">
+                  <li>10 vídeos realistas até 15s</li>
+                  <li>Alta qualidade</li>
+                  <li>Formato para redes sociais</li>
+                  <li>Revisões incluídas</li>
+                  <li>Economia de R$ 100</li>
+                </ul>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Contratar Agora</a>
+              </div>
+
+              <div className="pricing-card">
+                <h3>Vídeos Longos</h3>
+                <div className="price-tag">A Combinar</div>
+                <ul className="price-features">
+                  <li>Vídeos acima de 15s</li>
+                  <li>Formatos personalizados</li>
+                  <li>Projeto sob medida</li>
+                  <li>Consultoria incluída</li>
+                </ul>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Consultar</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Serviços Digitais */}
+          <div>
+            <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', textAlign: 'center' }}>Desenvolvimento Digital</h3>
+            <div className="card-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+              <div className="pricing-card">
+                <h3>Landing Page</h3>
+                <div className="price-tag">R$ 1.400<span></span></div>
+                <ul className="price-features">
+                  <li>Design moderno e responsivo</li>
+                  <li>Otimizada para conversão</li>
+                  <li>Integração com ferramentas</li>
+                  <li>SEO básico incluído</li>
+                  <li>Suporte pós-entrega</li>
+                </ul>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Contratar</a>
+              </div>
+
+              <div className="pricing-card premium">
+                <span style={{ color: '#0072FF', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Projeto Completo</span>
+                <h3 style={{ marginTop: '10px' }}>Sistema com Automação</h3>
+                <div className="price-tag">R$ 4.500<span></span></div>
+                <ul className="price-features">
+                  <li>Sistema completo personalizado</li>
+                  <li>Automações inteligentes</li>
+                  <li>Integrações avançadas</li>
+                  <li>Fluxos automatizados</li>
+                  <li>Suporte e manutenção</li>
+                  <li>Consultoria estratégica</li>
+                </ul>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Solicitar Proposta</a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Final CTA */}
+      <section className="section-padding" style={{ background: '#050505', textAlign: 'center' }}>
+        <div className="container">
+          <h2 style={{ marginBottom: '20px' }}>Quer imagens, vídeos ou um projeto digital sob medida?</h2>
+          <p className="lead" style={{ margin: '0 auto 40px', maxWidth: '600px' }}>Entre em contato e vamos criar algo incrível juntos.</p>
+          <a href="https://wa.me/5522998994412" className="btn-cta" style={{ fontSize: '1.1rem', padding: '16px 40px' }}>Falar no WhatsApp</a>
+        </div>
+      </section>
+
       <footer style={{ padding: '50px 0', borderTop: '1px solid #111', textAlign: 'center' }}>
-        <p style={{ color: '#444' }}>© 2025 Macaé Digital. Design Excellence.</p>
+        <p style={{ color: '#444' }}>© 2025 Macaé Digital - Criação com inteligência artificial.</p>
       </footer>
     </div>
   );
