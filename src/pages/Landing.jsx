@@ -202,14 +202,20 @@ function Landing() {
             </h3>
             <div className="portfolio-scroll">
               {portfolioItems.filter(item => item.type === 'video').length > 0 ? (
-                portfolioItems.filter(item => item.type === 'video').map((item) => (
-                  <div key={item.id} className="portfolio-card" onClick={() => openMedia(item.url, item.type)}>
-                    <div className="video-thumbnail-wrapper">
-                      <img src={item.thumbnail || item.url} alt={item.title} />
-                      <div className="play-icon-overlay"><i className="fas fa-play"></i></div>
+                portfolioItems.filter(item => item.type === 'video').map((item) => {
+                  // Optimize video URL and thumbnail
+                  const optimizedUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto/');
+                  const optimizedThumbnail = (item.thumbnail || item.url).replace('/upload/', '/upload/f_auto,q_auto,w_600/');
+
+                  return (
+                    <div key={item.id} className="portfolio-card" onClick={() => openMedia(optimizedUrl, item.type)}>
+                      <div className="video-thumbnail-wrapper">
+                        <img src={optimizedThumbnail} alt={item.title} />
+                        <div className="play-icon-overlay"><i className="fas fa-play"></i></div>
+                      </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               ) : (
                 <p style={{ color: '#444' }}>Em breve, novos vídeos aqui.</p>
               )}
@@ -223,11 +229,17 @@ function Landing() {
             </h3>
             <div className="portfolio-scroll">
               {portfolioItems.filter(item => item.type !== 'video').length > 0 ? (
-                portfolioItems.filter(item => item.type !== 'video').map((item) => (
-                  <div key={item.id} className="portfolio-card" onClick={() => openMedia(item.url, item.type)}>
-                    <img src={item.url} alt={item.title} />
-                  </div>
-                ))
+                portfolioItems.filter(item => item.type !== 'video').map((item) => {
+                  // Optimize image URL for gallery
+                  const optimizedUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto,w_600/');
+                  const fullResUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto/'); // For modal
+
+                  return (
+                    <div key={item.id} className="portfolio-card" onClick={() => openMedia(fullResUrl, item.type)}>
+                      <img src={optimizedUrl} alt={item.title} />
+                    </div>
+                  );
+                })
               ) : (
                 <p style={{ color: '#444' }}>Em breve, novas imagens aqui.</p>
               )}

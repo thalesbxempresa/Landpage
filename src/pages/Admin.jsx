@@ -58,7 +58,7 @@ function PortfolioCard({ item, editingId, editValue, setEditValue, saveTitle, ca
         }}>
             <div style={{ aspectRatio: '4/5', overflow: 'hidden', background: '#000', position: 'relative' }}>
                 <img
-                    src={item.type === 'video' ? item.thumbnail : item.url}
+                    src={(item.type === 'video' ? item.thumbnail : item.url).replace('/upload/', '/upload/f_auto,q_auto,w_600/')}
                     alt={item.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '0.7' }}
                 />
@@ -153,7 +153,10 @@ function PortfolioCard({ item, editingId, editValue, setEditValue, saveTitle, ca
                             {new Date(item.created_at || Date.now()).toLocaleDateString('pt-BR')}
                         </span>
                         <button
-                            onClick={() => removeItem(item.id)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                removeItem(item.id);
+                            }}
                             style={{
                                 background: 'none',
                                 border: 'none',
@@ -187,6 +190,7 @@ function Admin() {
     const [dbError, setDbError] = useState(null);
     const [editingId, setEditingId] = useState(null);
     const [editValue, setEditValue] = useState('');
+    const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
         fetchPortfolio();
@@ -222,6 +226,15 @@ function Admin() {
 
     const removeItem = async (id) => {
         if (!confirm('Deseja realmente excluir este item?')) return;
+
+        // Handle pending items (locally only)
+        if (id.toString().startsWith('temp-')) {
+            setPendingItems(prev => prev.filter(item => item.id !== id));
+            setHasUnsavedChanges(true);
+            return;
+        }
+
+        // Handle published items (from database)
         const { error } = await supabase
             .from('portfolio')
             .delete()
@@ -264,7 +277,11 @@ function Admin() {
     };
 
     const sensors = useSensors(
-        useSensor(PointerSensor),
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 5, // 5px movement required to start dragging, allows clicks to pass through
+            },
+        }),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates,
         })
@@ -291,43 +308,68 @@ function Admin() {
     };
 
     const saveChanges = async () => {
+        if (isSaving) return;
+        setIsSaving(true);
+
         try {
-            // Insert pending items into database
+            let finalItems = [...portfolioItems];
+
+            // 1. Insert pending items and get their real database IDs
             if (pendingItems.length > 0) {
                 const itemsToInsert = pendingItems.map(({ id, isPending, ...item }) => item);
 
-                const { error: insertError } = await supabase
+                const { data: insertedData, error: insertError } = await supabase
                     .from('portfolio')
-                    .insert(itemsToInsert);
+                    .insert(itemsToInsert)
+                    .select();
 
                 if (insertError) {
-                    alert('Erro ao salvar itens: ' + insertError.message);
-                    return;
+                    throw new Error('Erro ao inserir novos itens: ' + insertError.message);
+                }
+
+                // Append newly inserted items (with their new IDs) to our working list
+                if (insertedData) {
+                    // Match by URL to preserve the draft order
+                    const orderedInserted = pendingItems.map(pending =>
+                        insertedData.find(inserted => inserted.url === pending.url)
+                    ).filter(Boolean);
+
+                    finalItems = [...finalItems, ...orderedInserted];
                 }
             }
 
-            // Update display_order for all items
-            const allItems = [...portfolioItems, ...pendingItems];
-            const updates = allItems.map((item, index) => ({
-                url: item.url, // Use URL as identifier for pending items
+            // 2. Prepare all updates for display_order
+            // We use the full combined list in its current UI order
+            const allItemsInOrder = [...portfolioItems, ...pendingItems];
+
+            // Map the UI order to database items by URL (safest link between pending/published)
+            const updates = allItemsInOrder.map((uiItem, index) => ({
+                url: uiItem.url,
                 display_order: index + 1
             }));
 
+            // 3. Batch updates (sequential but handled as a single operation from UI perspective)
             for (const update of updates) {
-                await supabase
+                const { error: updateError } = await supabase
                     .from('portfolio')
                     .update({ display_order: update.display_order })
                     .eq('url', update.url);
+
+                if (updateError) {
+                    console.error(`Erro ao atualizar ordem do item ${update.url}:`, updateError);
+                }
             }
 
-            // Clear pending items and refresh
+            // 4. Reset state and refresh
             setPendingItems([]);
             setHasUnsavedChanges(false);
             await fetchPortfolio();
-            alert('✅ Alterações publicadas com sucesso!');
+            alert('✅ Todas as alterações foram publicadas com sucesso!');
         } catch (error) {
-            console.error('Erro ao salvar:', error);
-            alert('Erro ao salvar alterações.');
+            console.error('Erro crítico ao salvar:', error);
+            alert('Ocorreu um erro ao salvar as alterações: ' + error.message);
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -505,7 +547,7 @@ function Admin() {
                     <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                         <button
                             onClick={saveChanges}
-                            disabled={!hasUnsavedChanges}
+                            disabled={!hasUnsavedChanges || isSaving}
                             style={{
                                 padding: '15px 35px',
                                 display: 'flex',
@@ -514,20 +556,26 @@ function Admin() {
                                 fontSize: '0.9rem',
                                 textTransform: 'uppercase',
                                 letterSpacing: '1px',
-                                background: hasUnsavedChanges ? 'linear-gradient(135deg, #00d2ff, #0072FF)' : '#333',
+                                background: isSaving
+                                    ? 'rgba(0, 210, 255, 0.4)'
+                                    : (hasUnsavedChanges ? 'linear-gradient(135deg, #00d2ff, #0072FF)' : '#333'),
                                 color: '#fff',
                                 border: 'none',
                                 borderRadius: '12px',
-                                cursor: hasUnsavedChanges ? 'pointer' : 'not-allowed',
-                                opacity: hasUnsavedChanges ? 1 : 0.5,
-                                boxShadow: hasUnsavedChanges ? '0 10px 30px rgba(0, 210, 255, 0.4)' : 'none',
+                                cursor: (hasUnsavedChanges && !isSaving) ? 'pointer' : 'not-allowed',
+                                opacity: (hasUnsavedChanges || isSaving) ? 1 : 0.5,
+                                boxShadow: (hasUnsavedChanges && !isSaving) ? '0 10px 30px rgba(0, 210, 255, 0.4)' : 'none',
                                 transition: 'all 0.3s ease',
                                 fontWeight: '600'
                             }}
                         >
-                            <i className="fas fa-save"></i>
-                            Salvar Alterações
-                            {(pendingItems.length > 0 || hasUnsavedChanges) && (
+                            {isSaving ? (
+                                <i className="fas fa-spinner fa-spin"></i>
+                            ) : (
+                                <i className="fas fa-save"></i>
+                            )}
+                            {isSaving ? 'Salvando...' : 'Salvar Alterações'}
+                            {!isSaving && (pendingItems.length > 0 || hasUnsavedChanges) && (
                                 <span style={{
                                     background: '#fff',
                                     color: '#0072FF',
@@ -610,7 +658,7 @@ function Admin() {
                         <h2 style={{ fontSize: '1.5rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
                             <i className="fas fa-play-circle"></i> Vídeos (Motion)
                         </h2>
-                        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <DndContext id="dnd-videos" sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                             <SortableContext items={[...portfolioItems, ...pendingItems].filter(item => item.type === 'video').map(item => item.id)} strategy={rectSortingStrategy}>
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
                                     {[...portfolioItems, ...pendingItems].filter(item => item.type === 'video').map(item => (
@@ -630,7 +678,7 @@ function Admin() {
                         <h2 style={{ fontSize: '1.5rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
                             <i className="fas fa-images"></i> Imagens (Artes IA)
                         </h2>
-                        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <DndContext id="dnd-images" sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                             <SortableContext items={[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video').map(item => item.id)} strategy={rectSortingStrategy}>
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
                                     {[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video').map(item => (
