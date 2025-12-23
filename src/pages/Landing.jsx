@@ -469,6 +469,16 @@ function Landing() {
                 <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Falar com Especialista</a>
               </div>
             </div>
+
+            <div style={{ marginTop: '40px', textAlign: 'center', opacity: 0.8, fontSize: '0.9rem', maxWidth: '800px', margin: '40px auto 0', padding: '20px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+              <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: '#ccc', marginBottom: '8px' }}>
+                <i className="fas fa-info-circle" style={{ color: '#00d2ff' }}></i>
+                <span style={{ fontWeight: '500' }}>Nota de Transparência:</span> Valores referência para projetos iniciais (Start).
+              </p>
+              <p style={{ color: '#888', lineHeight: '1.5' }}>
+                Projetos que exigem integrações complexas, regras de negócio avançadas ou automações de alta escala são orçados sob medida. Nosso compromisso é entregar a solução exata para o seu nível de jogo, sem custos ocultos.
+              </p>
+            </div>
           </div>
         </div>
       </section >
