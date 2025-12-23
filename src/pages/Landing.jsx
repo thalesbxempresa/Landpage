@@ -159,14 +159,14 @@ function Landing() {
         <div className="container">
           <div className="section-head">
             <h2>Serviços</h2>
-            <p className="lead" style={{ margin: '0 auto' }}>Criação com inteligência artificial e desenvolvimento digital.</p>
+            <p className="lead" style={{ margin: '0 auto' }}>Soluções inteligentes com tecnologia de ponta para o seu negócio.</p>
           </div>
 
           <div className="card-grid">
             <div className="feature-card">
               <div className="icon-box"><i className="fas fa-image"></i></div>
               <h3>Pacotes de Imagens com IA</h3>
-              <p style={{ color: '#888' }}>Criação de imagens realistas e criativas com inteligência artificial para redes sociais, anúncios e projetos digitais.</p>
+              <p style={{ color: '#888' }}>Imagens realistas e criativas, geradas por IA, ideais para elevar a presença da sua marca em redes sociais e anúncios.</p>
             </div>
             <div className="feature-card">
               <div className="icon-box"><i className="fas fa-video"></i></div>
@@ -176,7 +176,7 @@ function Landing() {
             <div className="feature-card">
               <div className="icon-box"><i className="fas fa-file-code"></i></div>
               <h3>Landing Pages</h3>
-              <p style={{ color: '#888' }}>Criação de landing pages modernas, rápidas e focadas em conversão.</p>
+              <p style={{ color: '#888' }}>Desenvolvimento de páginas de alta performance, otimizadas para converter visitantes em clientes.</p>
             </div>
             <div className="feature-card">
               <div className="icon-box"><i className="fas fa-cogs"></i></div>
@@ -192,7 +192,7 @@ function Landing() {
         <div className="container">
           <div className="section-head text-left" style={{ textAlign: 'left', marginBottom: '40px' }}>
             <h2>Nossos Trabalhos</h2>
-            <p className="lead">Resultados reais criados com inteligência artificial.</p>
+            <p className="lead">Resultados reais potencializados pela inteligência artificial.</p>
           </div>
 
           {/* Videos Section - Modelo 1 */}
@@ -414,7 +414,7 @@ function Landing() {
                 }}>
                   <i className="fas fa-shield-alt" style={{ fontSize: '2rem', color: '#00d2ff' }}></i>
                 </div>
-                <h3 style={{ fontSize: '1.3rem', marginBottom: '15px', color: '#fff' }}>Pagamento Após Conclusão</h3>
+                <h3 style={{ fontSize: '1.3rem', marginBottom: '15px', color: '#fff' }}>Após Conclusão</h3>
                 <p style={{ color: '#aaa', lineHeight: '1.6' }}>
                   Para projetos de imagens e vídeos, você só paga após a entrega completa e aprovação do trabalho. Sem riscos.
                 </p>
@@ -464,110 +464,6 @@ function Landing() {
             </div>
           </div>
 
-          {/* Pacotes de Imagens */}
-          <div style={{ marginBottom: '60px' }}>
-            <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', textAlign: 'center' }}>Pacotes de Imagens com IA</h3>
-            <div className="card-grid">
-              <div className="pricing-card">
-                <h3>10 Imagens</h3>
-                <div className="price-tag">R$ 150<span></span></div>
-                <ul className="price-features">
-                  <li>10 imagens realistas com IA</li>
-                  <li>Alta qualidade</li>
-                  <li>Entrega rápida</li>
-                  <li>Revisões incluídas</li>
-                </ul>
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Contratar</a>
-              </div>
-
-              <div className="pricing-card premium">
-                <span style={{ color: '#0072FF', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Melhor Custo-Benefício</span>
-                <h3 style={{ marginTop: '10px' }}>20 Imagens</h3>
-                <div className="price-tag">R$ 200<span></span></div>
-                <ul className="price-features">
-                  <li>20 imagens realistas com IA</li>
-                  <li>Alta qualidade</li>
-                  <li>Entrega rápida</li>
-                  <li>Revisões incluídas</li>
-                  <li>Economia de R$ 100</li>
-                </ul>
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Contratar Agora</a>
-              </div>
-
-              <div className="pricing-card">
-                <h3>Plano Mensal</h3>
-                <div className="price-tag">A Combinar</div>
-                <ul className="price-features">
-                  <li>Volume personalizado</li>
-                  <li>Melhor custo-benefício</li>
-                  <li>Prioridade na entrega</li>
-                  <li>Suporte dedicado</li>
-                </ul>
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Consultar</a>
-              </div>
-            </div>
-          </div>
-
-          {/* Pacotes de Vídeos (Pricing Re-formatted) */}
-          <div style={{ marginBottom: '80px' }}>
-            <h2 style={{ fontSize: '2.2rem', marginBottom: '50px', textAlign: 'center', background: 'linear-gradient(to right, #00d2ff, #fff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              Preços e Modelos de Vídeo
-            </h2>
-
-            <div className="card-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
-              {/* Modelo 1 Pricing Card */}
-              <div className="pricing-card glass">
-                <span style={{ color: '#00d2ff', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px', fontWeight: 'bold' }}>Modelo 1</span>
-                <h3 style={{ marginTop: '10px', fontSize: '1.8rem' }}>Motion Design IA</h3>
-                <p style={{ color: '#666', marginBottom: '30px', fontSize: '0.9rem' }}>Vídeos ultra realistas e dinâmicos de alta conversão.</p>
-
-                <div style={{ textAlign: 'left', marginBottom: '30px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#eee' }}>1 Vídeo</span>
-                    <span style={{ color: '#00d2ff', fontWeight: 'bold' }}>R$ 50,00</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#eee' }}>3 Vídeos</span>
-                    <span style={{ color: '#00d2ff', fontWeight: 'bold' }}>R$ 100,00</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#eee' }}>5 Vídeos</span>
-                    <span style={{ color: '#00d2ff', fontWeight: 'bold' }}>R$ 150,00</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#eee' }}>10 Vídeos</span>
-                    <span style={{ color: '#00d2ff', fontWeight: 'bold' }}>R$ 200,00</span>
-                  </div>
-                </div>
-
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ width: '100%', display: 'block', borderRadius: '12px' }}>Contratar Modelo 1</a>
-              </div>
-
-              {/* Modelo 2 Pricing Card */}
-              <div className="pricing-card" style={{ background: 'rgba(5, 10, 16, 0.4)', borderColor: 'rgba(0, 210, 255, 0.2)' }}>
-                <span style={{ color: '#888', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Modelo 2</span>
-                <h3 style={{ marginTop: '10px', fontSize: '1.8rem', color: '#fff' }}>Motion Long Form</h3>
-                <p style={{ color: '#666', marginBottom: '30px', fontSize: '0.9rem' }}>Vídeos narrativos e tutoriais com tempos estendidos.</p>
-
-                <div style={{ textAlign: 'left', marginBottom: '30px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#eee' }}>Até 30 seg</span>
-                    <span style={{ color: '#fff', fontWeight: 'bold' }}>R$ 80,00</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#eee' }}>Até 1 minuto</span>
-                    <span style={{ color: '#fff', fontWeight: 'bold' }}>R$ 150,00</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#eee' }}>Até 2 minutos</span>
-                    <span style={{ color: '#fff', fontWeight: 'bold' }}>R$ 250,00</span>
-                  </div>
-                </div>
-
-                <a href="https://wa.me/5522998994412" className="btn-outline" style={{ width: '100%', display: 'block', borderRadius: '12px' }}>Contratar Modelo 2</a>
-              </div>
-            </div>
-          </div>
 
           {/* Serviços Digitais */}
           <div>
@@ -608,9 +504,9 @@ function Landing() {
       {/* Final CTA */}
       <section className="section-padding" style={{ background: '#050505', textAlign: 'center' }}>
         <div className="container">
-          <h2 style={{ marginBottom: '20px' }}>Quer imagens, vídeos ou um projeto digital sob medida?</h2>
-          <p className="lead" style={{ margin: '0 auto 40px', maxWidth: '600px' }}>Entre em contato e vamos criar algo incrível juntos.</p>
-          <a href="https://wa.me/5522998994412" className="btn-cta" style={{ fontSize: '1.1rem', padding: '16px 40px' }}>Falar no WhatsApp</a>
+          <h2 style={{ marginBottom: '20px' }}>Pronto para transformar sua presença digital?</h2>
+          <p className="lead" style={{ margin: '0 auto 40px', maxWidth: '600px' }}>Entre em contato e vamos construir algo extraordinário juntos.</p>
+          <a href="https://wa.me/5522998994412" className="btn-cta" style={{ fontSize: '1.1rem', padding: '16px 40px' }}>Iniciar Projeto</a>
         </div>
       </section>
 
