@@ -203,16 +203,16 @@ function Landing() {
 
             {/* Price Card Model 1 (Now with Model 2 prices) */}
             {/* Price Card Model 1 */}
-            <div className="pricing-card glass pricing-grid-mobile" style={{ marginBottom: '30px', padding: '25px', borderRadius: '24px' }}>
-              <div className="pricing-item-mobile">
+            <div className="pricing-card glass pricing-grid-responsive">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>1 Vídeo <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>(até 30 seg)</span></div>
                 <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 80,00</div>
               </div>
-              <div className="pricing-item-mobile">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>Até 1 Minuto</div>
                 <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 150,00</div>
               </div>
-              <div className="pricing-item-mobile" style={{ gridColumn: 'span 2' }}>
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>Até 2 Minutos</div>
                 <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 250,00</div>
               </div>
@@ -246,20 +246,20 @@ function Landing() {
 
             {/* Price Card Model 2 (Now with Model 1 prices) */}
             {/* Price Card Model 2 */}
-            <div className="pricing-card glass pricing-grid-mobile" style={{ marginBottom: '30px', padding: '25px', borderRadius: '24px' }}>
-              <div className="pricing-item-mobile">
+            <div className="pricing-card glass pricing-grid-responsive">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>1 Vídeo</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 50,00</div>
               </div>
-              <div className="pricing-item-mobile">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>3 Vídeos</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 100,00</div>
               </div>
-              <div className="pricing-item-mobile">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>5 Vídeos</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 150,00</div>
               </div>
-              <div className="pricing-item-mobile">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>10 Vídeos</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 200,00</div>
               </div>
@@ -293,20 +293,20 @@ function Landing() {
 
             {/* Price Card Images */}
             {/* Price Card Images */}
-            <div className="pricing-card glass pricing-grid-mobile" style={{ marginBottom: '30px', padding: '25px', borderRadius: '24px' }}>
-              <div className="pricing-item-mobile">
+            <div className="pricing-card glass pricing-grid-responsive">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>5 Imagens</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 50,00</div>
               </div>
-              <div className="pricing-item-mobile">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>10 Imagens</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 80,00</div>
               </div>
-              <div className="pricing-item-mobile">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>20 Imagens</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 200,00</div>
               </div>
-              <div className="pricing-item-mobile">
+              <div>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>Personalizado</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>A Combinar</div>
               </div>
@@ -379,9 +379,89 @@ function Landing() {
       {/* Pricing */}
       <section id="plans" className="section-padding">
         <div className="container">
-          <div className="section-head">
-            <h2>Pacotes e Investimento</h2>
-            <p className="lead" style={{ margin: '0 auto' }}>Escolha o pacote ideal para o seu projeto.</p>
+          {/* Guarantees & Payment Terms */}
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(0, 210, 255, 0.05) 0%, rgba(5, 10, 16, 0.8) 100%)',
+            padding: '60px 40px',
+            borderRadius: '30px',
+            border: '1px solid rgba(0, 210, 255, 0.2)',
+            marginBottom: '80px'
+          }}>
+            <h2 style={{
+              textAlign: 'center',
+              marginBottom: '50px',
+              background: 'linear-gradient(to right, #00d2ff, #fff)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontSize: '2.5rem'
+            }}>
+              Garantias e Condições de Pagamento
+            </h2>
+
+            <div className="card-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+              {/* Guarantee 1 */}
+              <div style={{ textAlign: 'center' }}>
+                <div style={{
+                  width: '80px',
+                  height: '80px',
+                  background: 'rgba(0, 210, 255, 0.1)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 20px',
+                  border: '2px solid rgba(0, 210, 255, 0.3)'
+                }}>
+                  <i className="fas fa-shield-alt" style={{ fontSize: '2rem', color: '#00d2ff' }}></i>
+                </div>
+                <h3 style={{ fontSize: '1.3rem', marginBottom: '15px', color: '#fff' }}>Pagamento Após Conclusão</h3>
+                <p style={{ color: '#aaa', lineHeight: '1.6' }}>
+                  Para projetos de imagens e vídeos, você só paga após a entrega completa e aprovação do trabalho. Sem riscos.
+                </p>
+              </div>
+
+              {/* Guarantee 2 */}
+              <div style={{ textAlign: 'center' }}>
+                <div style={{
+                  width: '80px',
+                  height: '80px',
+                  background: 'rgba(0, 210, 255, 0.1)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 20px',
+                  border: '2px solid rgba(0, 210, 255, 0.3)'
+                }}>
+                  <i className="fas fa-server" style={{ fontSize: '2rem', color: '#00d2ff' }}></i>
+                </div>
+                <h3 style={{ fontSize: '1.3rem', marginBottom: '15px', color: '#fff' }}>Custos de Infraestrutura</h3>
+                <p style={{ color: '#aaa', lineHeight: '1.6' }}>
+                  Em projetos maiores (sites, apps, sistemas), cobramos apenas os custos necessários: domínios, hospedagem e plataformas obrigatórias.
+                </p>
+              </div>
+
+              {/* Guarantee 3 */}
+              <div style={{ textAlign: 'center' }}>
+                <div style={{
+                  width: '80px',
+                  height: '80px',
+                  background: 'rgba(0, 210, 255, 0.1)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 20px',
+                  border: '2px solid rgba(0, 210, 255, 0.3)'
+                }}>
+                  <i className="fas fa-sync-alt" style={{ fontSize: '2rem', color: '#00d2ff' }}></i>
+                </div>
+                <h3 style={{ fontSize: '1.3rem', marginBottom: '15px', color: '#fff' }}>Revisões Incluídas</h3>
+                <p style={{ color: '#aaa', lineHeight: '1.6' }}>
+                  Todos os projetos incluem revisões para garantir que o resultado final atenda exatamente às suas expectativas.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Pacotes de Imagens */}

@@ -738,7 +738,7 @@ header {
 
 .section-head {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .card-grid {
@@ -880,7 +880,7 @@ header {
 /* Pricing */
 .pricing-card {
     background: rgba(255, 255, 255, 0.02);
-    padding: 40px 25px;
+    padding: 50px;
     border-radius: 30px;
     text-align: center;
     border: var(--glass-border);
@@ -909,9 +909,9 @@ header {
 }
 
 .price-tag {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 15px 0;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 20px 0;
     background: linear-gradient(to right, #fff, var(--accent-glow));
     background-clip: text;
     -webkit-background-clip: text;
@@ -989,6 +989,27 @@ header {
 .mobile-nav .btn-cta {
     margin-top: 30px;
     font-size: 1rem;
+}
+
+/* Responsive Pricing Grid */
+.pricing-grid-responsive {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    text-align: center;
+    border-radius: 24px;
+}
+
+.pricing-grid-responsive>div {
+    flex: 1;
+    min-width: 150px;
+}
+
+.pricing-grid-responsive>div:not(:first-child) {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 
@@ -1185,6 +1206,42 @@ header {
         padding: 10px !important;
         background: rgba(255, 255, 255, 0.03);
         border-radius: 12px;
+    }
+
+    /* Mobile Pricing Card Adjustments */
+    .pricing-card {
+        padding: 40px 25px;
+    }
+
+    .price-tag {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 15px 0;
+    }
+
+    .section-head {
+        margin-bottom: 60px;
+    }
+
+    /* Responsive Pricing Grid - Mobile Override */
+    .pricing-grid-responsive {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 15px !important;
+        padding: 15px !important;
+    }
+
+    .pricing-grid-responsive>div {
+        flex: none !important;
+        min-width: auto !important;
+        border: none !important;
+        padding: 10px !important;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+    }
+
+    .pricing-grid-responsive>div:not(:first-child) {
+        border-left: none !important;
     }
 
 }
