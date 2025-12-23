@@ -4,10 +4,12 @@ import { supabase } from '../supabaseClient';
 import {
     DndContext,
     closestCenter,
+    closestCorners,
     KeyboardSensor,
     PointerSensor,
     useSensor,
     useSensors,
+    useDroppable,
 } from '@dnd-kit/core';
 import {
     arrayMove,
@@ -18,6 +20,16 @@ import {
     rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+
+// Droppable Container Component
+function DroppableSection({ id, children }) {
+    const { setNodeRef } = useDroppable({ id });
+    return (
+        <div ref={setNodeRef} style={{ minHeight: '100px' }}>
+            {children}
+        </div>
+    );
+}
 
 // Sortable Item Component
 function SortableItem({ id, children }) {
@@ -45,7 +57,7 @@ function SortableItem({ id, children }) {
 }
 
 // Portfolio Card Helper Component
-function PortfolioCard({ item, editingId, editValue, setEditValue, saveTitle, cancelEditing, startEditing, removeItem }) {
+function PortfolioCard({ item, editingId, editValue, setEditValue, saveTitle, cancelEditing, startEditing, removeItem, aspectRatio = '4/5' }) {
     return (
         <div className="admin-item-card" style={{
             background: 'rgba(255, 255, 255, 0.02)',
@@ -56,11 +68,11 @@ function PortfolioCard({ item, editingId, editValue, setEditValue, saveTitle, ca
             transition: 'transform 0.3s ease, border-color 0.3s ease',
             cursor: 'default'
         }}>
-            <div style={{ aspectRatio: '4/5', overflow: 'hidden', background: '#000', position: 'relative' }}>
+            <div style={{ aspectRatio, overflow: 'hidden', background: '#000', position: 'relative' }}>
                 <img
-                    src={(item.type === 'video' ? item.thumbnail : item.url).replace('/upload/', '/upload/f_auto,q_auto,w_600/')}
+                    src={(item.type === 'video' ? item.thumbnail : item.url).replace('/upload/', '/upload/f_auto,q_auto,w_800/')}
                     alt={item.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '0.7' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '0.7', objectPosition: aspectRatio === '9/14' ? 'top' : 'center' }}
                 />
 
                 {item.isPending && (
@@ -101,7 +113,7 @@ function PortfolioCard({ item, editingId, editValue, setEditValue, saveTitle, ca
                 )}
             </div>
 
-            <div style={{ padding: '25px' }}>
+            <div style={{ padding: '15px' }}>
                 {editingId === item.id ? (
                     <div style={{ marginBottom: '15px', display: 'flex', gap: '10px' }}>
                         <input
@@ -135,7 +147,7 @@ function PortfolioCard({ item, editingId, editValue, setEditValue, saveTitle, ca
                         </button>
                     </div>
                 ) : (
-                    <h4 style={{ margin: '0 0 5px 0', fontSize: '1.1rem', fontWeight: '500', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h4 style={{ margin: '0 0 5px 0', fontSize: '0.95rem', fontWeight: '500', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         {item.title}
                         <i
                             className="fas fa-pencil-alt"
@@ -145,7 +157,7 @@ function PortfolioCard({ item, editingId, editValue, setEditValue, saveTitle, ca
                         ></i>
                     </h4>
                 )}
-                <p style={{ color: '#444', fontSize: '0.8rem', margin: 0 }}>ID do Sistema: {item.id}</p>
+                <p style={{ color: '#444', fontSize: '0.75rem', margin: 0 }}>ID do Sistema: {item.id}</p>
                 <div style={{ marginTop: '15px', height: '1px', background: 'rgba(255,255,255,0.03)', width: '100%' }}></div>
                 <div style={{ marginTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
@@ -208,7 +220,12 @@ function Admin() {
             console.error('Erro ao carregar portfólio:', error);
             setDbError(error.message);
         } else {
-            setPortfolioItems(data || []);
+            // Ensure every item has a section, default to 'Modelo 1' if missing
+            const itemsWithSection = (data || []).map(item => ({
+                ...item,
+                section: item.section || 'Modelo 1'
+            }));
+            setPortfolioItems(itemsWithSection);
         }
     };
 
@@ -287,17 +304,68 @@ function Admin() {
         })
     );
 
+    const findContainer = (id) => {
+        if (id === 'Modelo 1' || id === 'Modelo 2' || id === 'Geral' || id === 'Sites' || id === 'Aplicativos') return id;
+        const allItems = [...portfolioItems, ...pendingItems];
+        const item = allItems.find(i => i.id === id);
+        if (!item) return null;
+        return item.section || 'Geral';
+    };
+
+    const handleDragOver = (event) => {
+        const { active, over } = event;
+        if (!over) return;
+
+        const activeId = active.id;
+        const overId = over.id;
+
+        const activeContainer = findContainer(activeId);
+        const overContainer = findContainer(overId);
+
+        if (!activeContainer || !overContainer || activeContainer === overContainer) {
+            return;
+        }
+
+        // Prevent moving between videos and images sections
+        const isVideoSection = (c) => c === 'Modelo 1' || c === 'Modelo 2';
+        const isImageSection = (c) => c === 'Geral' || c === 'Sites' || c === 'Aplicativos';
+
+        // Revised logic: active ID type must match target container type
+        const activeItem = [...portfolioItems, ...pendingItems].find(i => i.id === activeId);
+        if (!activeItem) return;
+
+        const targetIsVideoSection = isVideoSection(overContainer);
+        if (activeItem.type === 'video' && !targetIsVideoSection) return;
+        if (activeItem.type !== 'video' && targetIsVideoSection) return;
+
+        const updateItems = (items) => items.map(i => i.id === activeId ? { ...i, section: overContainer } : i);
+        setPortfolioItems(prev => updateItems(prev));
+        setPendingItems(prev => updateItems(prev));
+        setHasUnsavedChanges(true);
+    };
+
     const handleDragEnd = async (event) => {
         const { active, over } = event;
+        if (!over) return;
 
-        if (active.id !== over.id) {
-            const allItems = [...portfolioItems, ...pendingItems];
-            const oldIndex = allItems.findIndex((item) => item.id === active.id);
-            const newIndex = allItems.findIndex((item) => item.id === over.id);
+        const activeId = active.id;
+        const overId = over.id;
 
-            const newItems = arrayMove(allItems, oldIndex, newIndex);
+        const activeContainer = findContainer(activeId);
+        const overContainer = findContainer(overId);
 
-            // Separate published and pending items
+        // Allow reordering within the same container (including 'Images')
+        if (!activeContainer || !overContainer || activeContainer !== overContainer) {
+            return;
+        }
+
+        const allItems = [...portfolioItems, ...pendingItems];
+        const activeIndex = allItems.findIndex((item) => item.id === activeId);
+        const overIndex = allItems.findIndex((item) => item.id === overId);
+
+        if (activeIndex !== -1 && overIndex !== -1 && activeIndex !== overIndex) {
+            const newItems = arrayMove(allItems, activeIndex, overIndex);
+
             const published = newItems.filter(item => !item.isPending);
             const pending = newItems.filter(item => item.isPending);
 
@@ -312,9 +380,10 @@ function Admin() {
         setIsSaving(true);
 
         try {
-            let finalItems = [...portfolioItems];
+            let allItemsInOrder = [...portfolioItems, ...pendingItems];
+            let itemsWithRealIds = [];
 
-            // 1. Insert pending items and get their real database IDs
+            // 1. Insert pending items first
             if (pendingItems.length > 0) {
                 const itemsToInsert = pendingItems.map(({ id, isPending, ...item }) => item);
 
@@ -327,53 +396,72 @@ function Admin() {
                     throw new Error('Erro ao inserir novos itens: ' + insertError.message);
                 }
 
-                // Append newly inserted items (with their new IDs) to our working list
-                if (insertedData) {
-                    // Match by URL to preserve the draft order
-                    const orderedInserted = pendingItems.map(pending =>
-                        insertedData.find(inserted => inserted.url === pending.url)
-                    ).filter(Boolean);
-
-                    finalItems = [...finalItems, ...orderedInserted];
-                }
+                // Create a map of items in order with their new IDs from Supabase
+                // We use URL as the key since it's unique in the draft stage
+                itemsWithRealIds = allItemsInOrder.map(uiItem => {
+                    if (uiItem.isPending) {
+                        const dbItem = insertedData.find(d => d.url === uiItem.url);
+                        return dbItem ? { ...dbItem, isPending: false } : uiItem;
+                    }
+                    return uiItem;
+                });
+            } else {
+                itemsWithRealIds = allItemsInOrder;
             }
 
-            // 2. Prepare all updates for display_order
-            // We use the full combined list in its current UI order
-            const allItemsInOrder = [...portfolioItems, ...pendingItems];
-
-            // Map the UI order to database items by URL (safest link between pending/published)
-            const updates = allItemsInOrder.map((uiItem, index) => ({
-                url: uiItem.url,
-                display_order: index + 1
+            // 2. Prepare all updates for display_order and section
+            const updates = itemsWithRealIds.map((item, index) => ({
+                id: item.id,
+                display_order: index + 1,
+                section: item.section || 'Modelo 1'
             }));
 
-            // 3. Batch updates (sequential but handled as a single operation from UI perspective)
+            // 3. Batch updates with granular error tracking
+            const errors = [];
             for (const update of updates) {
                 const { error: updateError } = await supabase
                     .from('portfolio')
-                    .update({ display_order: update.display_order })
-                    .eq('url', update.url);
+                    .update({
+                        display_order: update.display_order,
+                        section: update.section
+                    })
+                    .eq('id', update.id);
 
                 if (updateError) {
-                    console.error(`Erro ao atualizar ordem do item ${update.url}:`, updateError);
+                    errors.push(`ID ${update.id}: ${updateError.message}`);
                 }
             }
 
-            // 4. Reset state and refresh
+            if (errors.length > 0) {
+                const hasSectionError = errors.some(e => e.toLowerCase().includes('section') || e.includes('404') || e.includes('column'));
+
+                let errorMessage = `Ocorreram ${errors.length} erros ao salvar:\n\n` + errors.slice(0, 3).join('\n');
+                if (errors.length > 3) errorMessage += `\n...e mais ${errors.length - 3} erros.`;
+
+                if (hasSectionError) {
+                    errorMessage += '\n\n⚠️ IMPORTANTE: Parece que a coluna "section" não existe no banco de dados. Você executou o comando SQL no Supabase?';
+                }
+
+                alert(errorMessage);
+                throw new Error('Falha parcial ao salvar - verifique o console.');
+            }
+
+            // 4. Success Reset
             setPendingItems([]);
             setHasUnsavedChanges(false);
             await fetchPortfolio();
-            alert('✅ Todas as alterações foram publicadas com sucesso!');
+            alert('✅ Todas as alterações (incluindo seções) foram publicadas com sucesso!');
         } catch (error) {
             console.error('Erro crítico ao salvar:', error);
-            alert('Ocorreu um erro ao salvar as alterações: ' + error.message);
+            if (!error.message.includes('Erro ao inserir')) {
+                alert('Ocorreu um erro ao salvar: ' + error.message);
+            }
         } finally {
             setIsSaving(false);
         }
     };
 
-    const openCloudinaryWidget = () => {
+    const openCloudinaryWidget = (defaultSection = 'Geral') => {
         if (!window.cloudinary) {
             alert('Carregando Cloudinary... tente novamente em instantes.');
             return;
@@ -427,7 +515,7 @@ function Admin() {
                         isPending: true
                     };
 
-                    setPendingItems(prev => [...prev, newItem]);
+                    setPendingItems(prev => [...prev, { ...newItem, section: defaultSection }]);
                     setHasUnsavedChanges(true);
                     console.log('Item adicionado como pendente:', newItem);
                 }
@@ -447,11 +535,11 @@ function Admin() {
         }}>
             {/* Sidebar futurista */}
             <aside style={{
-                width: '280px',
+                width: '240px',
                 background: 'rgba(5, 10, 16, 0.95)',
                 backdropFilter: 'blur(20px)',
                 borderRight: '1px solid rgba(0, 210, 255, 0.1)',
-                padding: '40px 20px',
+                padding: '30px 15px',
                 display: 'flex',
                 flexDirection: 'column',
                 minHeight: '100vh',
@@ -522,7 +610,7 @@ function Admin() {
             {/* Conteúdo Principal */}
             <main style={{
                 flex: 1,
-                padding: '60px',
+                padding: '30px 40px',
                 background: 'radial-gradient(circle at top right, rgba(0, 210, 255, 0.05), transparent 40%)',
                 minWidth: 0 // Prevent flex shrink issues
             }}>
@@ -530,16 +618,16 @@ function Admin() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'flex-end',
-                    marginBottom: '60px'
+                    marginBottom: '40px'
                 }}>
                     <div>
                         <h1 style={{
-                            fontSize: '2.5rem',
+                            fontSize: '1.8rem',
                             margin: 0,
                             background: 'linear-gradient(to right, #fff, #00d2ff)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
-                            letterSpacing: '-1px'
+                            letterSpacing: '-0.5px'
                         }}>Portfólio Dinâmico</h1>
                         <p style={{ color: '#555', marginTop: '10px' }}>Gerencie a vitrine digital da Macaé Digital</p>
                     </div>
@@ -597,14 +685,14 @@ function Admin() {
                             onClick={openCloudinaryWidget}
                             className="btn-cta"
                             style={{
-                                padding: '15px 35px',
+                                padding: '12px 25px',
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '12px',
-                                fontSize: '0.9rem',
+                                gap: '10px',
+                                fontSize: '0.8rem',
                                 textTransform: 'uppercase',
                                 letterSpacing: '1px',
-                                boxShadow: '0 10px 30px rgba(0, 210, 255, 0.3)'
+                                boxShadow: '0 8px 25px rgba(0, 210, 255, 0.3)'
                             }}
                         >
                             <i className="fas fa-plus"></i> Upload Cloudinary
@@ -652,44 +740,286 @@ function Admin() {
                     </div>
                 )}
 
-                {/* Videos Section */}
+                {/* Videos Section - Shared DndContext for all videos to allow moving between Modelo 1 and 2 */}
                 {([...portfolioItems, ...pendingItems].filter(item => item.type === 'video').length > 0) && (
-                    <div style={{ marginBottom: '80px' }}>
-                        <h2 style={{ fontSize: '1.5rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
-                            <i className="fas fa-play-circle"></i> Vídeos (Motion)
-                        </h2>
-                        <DndContext id="dnd-videos" sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                            <SortableContext items={[...portfolioItems, ...pendingItems].filter(item => item.type === 'video').map(item => item.id)} strategy={rectSortingStrategy}>
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
-                                    {[...portfolioItems, ...pendingItems].filter(item => item.type === 'video').map(item => (
-                                        <SortableItem key={item.id} id={item.id}>
-                                            <PortfolioCard item={item} editingId={editingId} editValue={editValue} setEditValue={setEditValue} saveTitle={saveTitle} cancelEditing={cancelEditing} startEditing={startEditing} removeItem={removeItem} />
-                                        </SortableItem>
-                                    ))}
-                                </div>
+                    <DndContext id="dnd-videos-root" sensors={sensors} collisionDetection={closestCorners} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
+
+                        {/* Modelo 1 */}
+                        <div style={{ marginBottom: '60px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+                                <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
+                                    <i className="fas fa-play-circle"></i> Vídeos - Modelo 1
+                                </h2>
+                                <button
+                                    onClick={() => openCloudinaryWidget('Modelo 1')}
+                                    style={{
+                                        background: 'rgba(0, 210, 255, 0.1)',
+                                        border: '1px solid rgba(0, 210, 255, 0.2)',
+                                        color: '#00d2ff',
+                                        padding: '8px 15px',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        fontSize: '0.8rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.2)'}
+                                    onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.1)'}
+                                >
+                                    <i className="fas fa-upload"></i> Upload para Modelo 1
+                                </button>
+                            </div>
+                            <SortableContext id="Modelo 1" items={[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 1').map(item => item.id)} strategy={rectSortingStrategy}>
+                                <DroppableSection id="Modelo 1">
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                                        gap: '25px',
+                                        minHeight: '120px',
+                                        padding: '15px',
+                                        background: 'rgba(255,255,255,0.02)',
+                                        borderRadius: '15px',
+                                        border: '1px dashed rgba(255,255,255,0.05)'
+                                    }}>
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 1').map(item => (
+                                            <SortableItem key={item.id} id={item.id}>
+                                                <PortfolioCard item={item} editingId={editingId} editValue={editValue} setEditValue={setEditValue} saveTitle={saveTitle} cancelEditing={cancelEditing} startEditing={startEditing} removeItem={removeItem} aspectRatio="4/5" />
+                                            </SortableItem>
+                                        ))}
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 1').length === 0 && (
+                                            <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: '#444' }}>
+                                                Arraste vídeos aqui para Modelo 1
+                                            </div>
+                                        )}
+                                    </div>
+                                </DroppableSection>
                             </SortableContext>
-                        </DndContext>
-                    </div>
+                        </div>
+
+                        {/* Modelo 2 */}
+                        <div style={{ marginBottom: '80px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+                                <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
+                                    <i className="fas fa-play-circle"></i> Vídeos - Modelo 2
+                                </h2>
+                                <button
+                                    onClick={() => openCloudinaryWidget('Modelo 2')}
+                                    style={{
+                                        background: 'rgba(0, 210, 255, 0.1)',
+                                        border: '1px solid rgba(0, 210, 255, 0.2)',
+                                        color: '#00d2ff',
+                                        padding: '8px 15px',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        fontSize: '0.8rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.2)'}
+                                    onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.1)'}
+                                >
+                                    <i className="fas fa-upload"></i> Upload para Modelo 2
+                                </button>
+                            </div>
+                            <SortableContext id="Modelo 2" items={[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 2').map(item => item.id)} strategy={rectSortingStrategy}>
+                                <DroppableSection id="Modelo 2">
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                                        gap: '25px',
+                                        minHeight: '120px',
+                                        padding: '15px',
+                                        background: 'rgba(255,255,255,0.02)',
+                                        borderRadius: '15px',
+                                        border: '1px dashed rgba(255,255,255,0.05)'
+                                    }}>
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 2').map(item => (
+                                            <SortableItem key={item.id} id={item.id}>
+                                                <PortfolioCard item={item} editingId={editingId} editValue={editValue} setEditValue={setEditValue} saveTitle={saveTitle} cancelEditing={cancelEditing} startEditing={startEditing} removeItem={removeItem} aspectRatio="4/5" />
+                                            </SortableItem>
+                                        ))}
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 2').length === 0 && (
+                                            <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: '#444' }}>
+                                                Arraste vídeos aqui para Modelo 2
+                                            </div>
+                                        )}
+                                    </div>
+                                </DroppableSection>
+                            </SortableContext>
+                        </div>
+                    </DndContext>
                 )}
 
-                {/* Images Section */}
+                {/* Images Context (Shared for all image sections) */}
                 {([...portfolioItems, ...pendingItems].filter(item => item.type !== 'video').length > 0) && (
-                    <div>
-                        <h2 style={{ fontSize: '1.5rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
-                            <i className="fas fa-images"></i> Imagens (Artes IA)
-                        </h2>
-                        <DndContext id="dnd-images" sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                            <SortableContext items={[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video').map(item => item.id)} strategy={rectSortingStrategy}>
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
-                                    {[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video').map(item => (
-                                        <SortableItem key={item.id} id={item.id}>
-                                            <PortfolioCard item={item} editingId={editingId} editValue={editValue} setEditValue={setEditValue} saveTitle={saveTitle} cancelEditing={cancelEditing} startEditing={startEditing} removeItem={removeItem} />
-                                        </SortableItem>
-                                    ))}
-                                </div>
+                    <DndContext id="dnd-images-root" sensors={sensors} collisionDetection={closestCorners} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
+
+                        {/* Geral Section */}
+                        <div style={{ marginBottom: '60px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+                                <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
+                                    <i className="fas fa-images"></i> Outras Imagens (Geral)
+                                </h2>
+                                <button
+                                    onClick={() => openCloudinaryWidget('Geral')}
+                                    style={{
+                                        background: 'rgba(0, 210, 255, 0.1)',
+                                        border: '1px solid rgba(0, 210, 255, 0.2)',
+                                        color: '#00d2ff',
+                                        padding: '8px 15px',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        fontSize: '0.8rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.2)'}
+                                    onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.1)'}
+                                >
+                                    <i className="fas fa-upload"></i> Upload para Geral
+                                </button>
+                            </div>
+                            <SortableContext id="Geral" items={[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && (item.section === 'Geral' || item.section === 'Modelo 1' || !item.section)).map(item => item.id)} strategy={rectSortingStrategy}>
+                                <DroppableSection id="Geral">
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                                        gap: '20px',
+                                        minHeight: '120px',
+                                        padding: '15px',
+                                        background: 'rgba(255,255,255,0.02)',
+                                        borderRadius: '15px',
+                                        border: '1px dashed rgba(255,255,255,0.05)'
+                                    }}>
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && (item.section === 'Geral' || item.section === 'Modelo 1' || !item.section)).map(item => (
+                                            <SortableItem key={item.id} id={item.id}>
+                                                <PortfolioCard item={item} editingId={editingId} editValue={editValue} setEditValue={setEditValue} saveTitle={saveTitle} cancelEditing={cancelEditing} startEditing={startEditing} removeItem={removeItem} aspectRatio="4/5" />
+                                            </SortableItem>
+                                        ))}
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && (item.section === 'Geral' || item.section === 'Modelo 1' || !item.section)).length === 0 && (
+                                            <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: '#444' }}>
+                                                Arraste outras imagens aqui
+                                            </div>
+                                        )}
+                                    </div>
+                                </DroppableSection>
                             </SortableContext>
-                        </DndContext>
-                    </div>
+                        </div>
+
+                        {/* Sites Section */}
+                        <div style={{ marginBottom: '60px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+                                <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
+                                    <i className="fas fa-desktop"></i> Amostras de Sites
+                                </h2>
+                                <button
+                                    onClick={() => openCloudinaryWidget('Sites')}
+                                    style={{
+                                        background: 'rgba(0, 210, 255, 0.1)',
+                                        border: '1px solid rgba(0, 210, 255, 0.2)',
+                                        color: '#00d2ff',
+                                        padding: '8px 15px',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        fontSize: '0.8rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.2)'}
+                                    onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.1)'}
+                                >
+                                    <i className="fas fa-upload"></i> Upload para Sites
+                                </button>
+                            </div>
+                            <SortableContext id="Sites" items={[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && item.section === 'Sites').map(item => item.id)} strategy={rectSortingStrategy}>
+                                <DroppableSection id="Sites">
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                                        gap: '30px',
+                                        minHeight: '150px',
+                                        padding: '20px',
+                                        background: 'rgba(255,255,255,0.02)',
+                                        borderRadius: '15px',
+                                        border: '1px dashed rgba(255,255,255,0.05)'
+                                    }}>
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && item.section === 'Sites').map(item => (
+                                            <SortableItem key={item.id} id={item.id}>
+                                                <PortfolioCard item={item} editingId={editingId} editValue={editValue} setEditValue={setEditValue} saveTitle={saveTitle} cancelEditing={cancelEditing} startEditing={startEditing} removeItem={removeItem} aspectRatio="9/14" />
+                                            </SortableItem>
+                                        ))}
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && item.section === 'Sites').length === 0 && (
+                                            <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: '#444' }}>
+                                                Arraste imagens de Sites aqui
+                                            </div>
+                                        )}
+                                    </div>
+                                </DroppableSection>
+                            </SortableContext>
+                        </div>
+
+                        {/* Apps Section */}
+                        <div style={{ marginBottom: '60px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+                                <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
+                                    <i className="fas fa-mobile-alt"></i> Amostras de Aplicativos
+                                </h2>
+                                <button
+                                    onClick={() => openCloudinaryWidget('Aplicativos')}
+                                    style={{
+                                        background: 'rgba(0, 210, 255, 0.1)',
+                                        border: '1px solid rgba(0, 210, 255, 0.2)',
+                                        color: '#00d2ff',
+                                        padding: '8px 15px',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        fontSize: '0.8rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.2)'}
+                                    onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.1)'}
+                                >
+                                    <i className="fas fa-upload"></i> Upload para Aplicativos
+                                </button>
+                            </div>
+                            <SortableContext id="Aplicativos" items={[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && item.section === 'Aplicativos').map(item => item.id)} strategy={rectSortingStrategy}>
+                                <DroppableSection id="Aplicativos">
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                                        gap: '30px',
+                                        minHeight: '150px',
+                                        padding: '20px',
+                                        background: 'rgba(255,255,255,0.02)',
+                                        borderRadius: '15px',
+                                        border: '1px dashed rgba(255,255,255,0.05)'
+                                    }}>
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && item.section === 'Aplicativos').map(item => (
+                                            <SortableItem key={item.id} id={item.id}>
+                                                <PortfolioCard item={item} editingId={editingId} editValue={editValue} setEditValue={setEditValue} saveTitle={saveTitle} cancelEditing={cancelEditing} startEditing={startEditing} removeItem={removeItem} aspectRatio="9/14" />
+                                            </SortableItem>
+                                        ))}
+                                        {[...portfolioItems, ...pendingItems].filter(item => item.type !== 'video' && item.section === 'Aplicativos').length === 0 && (
+                                            <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: '#444' }}>
+                                                Arraste imagens de Apps aqui
+                                            </div>
+                                        )}
+                                    </div>
+                                </DroppableSection>
+                            </SortableContext>
+                        </div>
+                    </DndContext>
                 )}
             </main>
         </div>

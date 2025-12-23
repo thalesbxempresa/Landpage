@@ -823,7 +823,7 @@ header {
 /* Portfolio Section */
 .portfolio-scroll {
     display: flex;
-    gap: 40px;
+    gap: 25px;
     overflow-x: auto;
     padding: 20px 0 60px 0;
     scroll-behavior: smooth;
@@ -848,7 +848,7 @@ header {
 
 .portfolio-card {
     position: relative;
-    width: 400px;
+    width: 280px;
     aspect-ratio: 4 / 5;
     height: auto;
     border-radius: 24px;
@@ -864,6 +864,16 @@ header {
     transform: translateY(-15px) scale(1.02);
     box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 210, 255, 0.15);
     border-color: rgba(0, 210, 255, 0.4);
+}
+
+/* Specific for website/app screenshots */
+.portfolio-card.vertical {
+    width: 320px;
+    aspect-ratio: 9 / 14;
+}
+
+.portfolio-card.screenshot-img img {
+    object-position: top;
 }
 
 /* Pricing */
@@ -907,6 +917,19 @@ header {
     font-size: 1rem;
     color: #666;
     font-weight: 400;
+}
+
+.pricing-card.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pricing-card.glass:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .price-features li {

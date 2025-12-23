@@ -195,15 +195,39 @@ function Landing() {
             <p className="lead">Resultados reais criados com inteligência artificial.</p>
           </div>
 
-          {/* Videos Section */}
+          {/* Videos Section - Modelo 1 */}
           <div style={{ marginBottom: '80px' }}>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <i className="fas fa-play-circle" style={{ color: '#00d2ff' }}></i> Portfólio em Vídeo
+              <i className="fas fa-play-circle" style={{ color: '#00d2ff' }}></i> Portfólio - Modelos 1
             </h3>
+
+            {/* Price Card Model 1 (Now with Model 2 prices) */}
+            <div className="pricing-card glass" style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '20px',
+              padding: '25px',
+              marginBottom: '30px',
+              textAlign: 'center',
+              borderRadius: '24px'
+            }}>
+              <div style={{ flex: '1', minWidth: '200px' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>1 Vídeo <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>(até 30 seg)</span></div>
+                <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 80,00</div>
+              </div>
+              <div style={{ flex: '1', minWidth: '200px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>Até 1 Minuto</div>
+                <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 150,00</div>
+              </div>
+              <div style={{ flex: '1', minWidth: '200px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>Até 2 Minutos</div>
+                <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 250,00</div>
+              </div>
+            </div>
             <div className="portfolio-scroll">
-              {portfolioItems.filter(item => item.type === 'video').length > 0 ? (
-                portfolioItems.filter(item => item.type === 'video').map((item) => {
-                  // Optimize video URL and thumbnail
+              {portfolioItems.filter(item => item.type === 'video' && (item.section === 'Modelo 1' || !item.section)).length > 0 ? (
+                portfolioItems.filter(item => item.type === 'video' && (item.section === 'Modelo 1' || !item.section)).map((item) => {
                   const optimizedUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto/');
                   const optimizedThumbnail = (item.thumbnail || item.url).replace('/upload/', '/upload/f_auto,q_auto,w_600/');
 
@@ -222,18 +246,100 @@ function Landing() {
             </div>
           </div>
 
-          {/* Images Section */}
-          <div>
+          {/* Videos Section - Modelo 2 */}
+          <div style={{ marginBottom: '80px' }}>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <i className="fas fa-images" style={{ color: '#00d2ff' }}></i> Exemplos de Imagens
+              <i className="fas fa-play-circle" style={{ color: '#00d2ff' }}></i> Portfólio - Modelo 2
             </h3>
-            <div className="portfolio-scroll">
-              {portfolioItems.filter(item => item.type !== 'video').length > 0 ? (
-                portfolioItems.filter(item => item.type !== 'video').map((item) => {
-                  // Optimize image URL for gallery
-                  const optimizedUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto,w_600/');
-                  const fullResUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto/'); // For modal
 
+            {/* Price Card Model 2 (Now with Model 1 prices) */}
+            <div className="pricing-card glass" style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '20px',
+              padding: '25px',
+              marginBottom: '30px',
+              textAlign: 'center',
+              borderRadius: '24px'
+            }}>
+              <div style={{ flex: '1', minWidth: '150px' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>1 Vídeo</div>
+                <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 50,00</div>
+              </div>
+              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>3 Vídeos</div>
+                <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 100,00</div>
+              </div>
+              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>5 Vídeos</div>
+                <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 150,00</div>
+              </div>
+              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>10 Vídeos</div>
+                <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 200,00</div>
+              </div>
+            </div>
+            <div className="portfolio-scroll">
+              {portfolioItems.filter(item => item.type === 'video' && item.section === 'Modelo 2').length > 0 ? (
+                portfolioItems.filter(item => item.type === 'video' && item.section === 'Modelo 2').map((item) => {
+                  const optimizedUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto/');
+                  const optimizedThumbnail = (item.thumbnail || item.url).replace('/upload/', '/upload/f_auto,q_auto,w_600/');
+
+                  return (
+                    <div key={item.id} className="portfolio-card" onClick={() => openMedia(optimizedUrl, item.type)}>
+                      <div className="video-thumbnail-wrapper">
+                        <img src={optimizedThumbnail} alt={item.title} />
+                        <div className="play-icon-overlay"><i className="fas fa-play"></i></div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <p style={{ color: '#444' }}>Em breve, novos vídeos aqui.</p>
+              )}
+            </div>
+          </div>
+
+          {/* AI Arts Section (Geral) */}
+          <div style={{ marginBottom: '80px' }}>
+            <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <i className="fas fa-magic" style={{ color: '#00d2ff' }}></i> Artes com IA (Visual Geral)
+            </h3>
+
+            {/* Price Card Images */}
+            <div className="pricing-card glass" style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '20px',
+              padding: '25px',
+              marginBottom: '30px',
+              textAlign: 'center',
+              borderRadius: '24px'
+            }}>
+              <div style={{ flex: '1', minWidth: '150px' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>5 Imagens</div>
+                <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 50,00</div>
+              </div>
+              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>10 Imagens</div>
+                <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 80,00</div>
+              </div>
+              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>20 Imagens</div>
+                <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 200,00</div>
+              </div>
+              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>Personalizado</div>
+                <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>A Combinar</div>
+              </div>
+            </div>
+            <div className="portfolio-scroll">
+              {portfolioItems.filter(item => item.type !== 'video' && (!item.section || item.section === 'Modelo 1' || item.section === 'Geral')).length > 0 ? (
+                portfolioItems.filter(item => item.type !== 'video' && (!item.section || item.section === 'Modelo 1' || item.section === 'Geral')).map((item) => {
+                  const optimizedUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto,w_600/');
+                  const fullResUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto/');
                   return (
                     <div key={item.id} className="portfolio-card" onClick={() => openMedia(fullResUrl, item.type)}>
                       <img src={optimizedUrl} alt={item.title} />
@@ -241,7 +347,51 @@ function Landing() {
                   );
                 })
               ) : (
-                <p style={{ color: '#444' }}>Em breve, novas imagens aqui.</p>
+                <p style={{ color: '#444' }}>Em breve, novas artes aqui.</p>
+              )}
+            </div>
+          </div>
+
+          {/* Sites Section */}
+          <div style={{ marginBottom: '80px' }}>
+            <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <i className="fas fa-desktop" style={{ color: '#00d2ff' }}></i> Amostras de Sites (Lançamentos e SaaS)
+            </h3>
+            <div className="portfolio-scroll">
+              {portfolioItems.filter(item => item.type !== 'video' && item.section === 'Sites').length > 0 ? (
+                portfolioItems.filter(item => item.type !== 'video' && item.section === 'Sites').map((item) => {
+                  const optimizedUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto,w_600/');
+                  const fullResUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto/');
+                  return (
+                    <div key={item.id} className="portfolio-card vertical screenshot-img" onClick={() => openMedia(fullResUrl, item.type)}>
+                      <img src={optimizedUrl} alt={item.title} />
+                    </div>
+                  );
+                })
+              ) : (
+                <p style={{ color: '#444' }}>Novos sites em desenvolvimento.</p>
+              )}
+            </div>
+          </div>
+
+          {/* Apps Section */}
+          <div style={{ marginBottom: '60px' }}>
+            <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <i className="fas fa-mobile-alt" style={{ color: '#00d2ff' }}></i> Amostras de Aplicativos (UI/UX)
+            </h3>
+            <div className="portfolio-scroll">
+              {portfolioItems.filter(item => item.type !== 'video' && item.section === 'Aplicativos').length > 0 ? (
+                portfolioItems.filter(item => item.type !== 'video' && item.section === 'Aplicativos').map((item) => {
+                  const optimizedUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto,w_600/');
+                  const fullResUrl = item.url.replace('/upload/', '/upload/f_auto,q_auto/');
+                  return (
+                    <div key={item.id} className="portfolio-card vertical screenshot-img" onClick={() => openMedia(fullResUrl, item.type)}>
+                      <img src={optimizedUrl} alt={item.title} />
+                    </div>
+                  );
+                })
+              ) : (
+                <p style={{ color: '#444' }}>Novos aplicativos em criação.</p>
               )}
             </div>
           </div>
@@ -300,46 +450,63 @@ function Landing() {
             </div>
           </div>
 
-          {/* Pacotes de Vídeos */}
-          <div style={{ marginBottom: '60px' }}>
-            <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', textAlign: 'center' }}>Pacotes de Vídeos com IA (até 15s)</h3>
-            <div className="card-grid">
-              <div className="pricing-card">
-                <h3>5 Vídeos</h3>
-                <div className="price-tag">R$ 200<span></span></div>
-                <ul className="price-features">
-                  <li>5 vídeos realistas até 15s</li>
-                  <li>Alta qualidade</li>
-                  <li>Formato para redes sociais</li>
-                  <li>Revisões incluídas</li>
-                </ul>
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Contratar</a>
+          {/* Pacotes de Vídeos (Pricing Re-formatted) */}
+          <div style={{ marginBottom: '80px' }}>
+            <h2 style={{ fontSize: '2.2rem', marginBottom: '50px', textAlign: 'center', background: 'linear-gradient(to right, #00d2ff, #fff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              Preços e Modelos de Vídeo
+            </h2>
+
+            <div className="card-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
+              {/* Modelo 1 Pricing Card */}
+              <div className="pricing-card glass">
+                <span style={{ color: '#00d2ff', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px', fontWeight: 'bold' }}>Modelo 1</span>
+                <h3 style={{ marginTop: '10px', fontSize: '1.8rem' }}>Motion Design IA</h3>
+                <p style={{ color: '#666', marginBottom: '30px', fontSize: '0.9rem' }}>Vídeos ultra realistas e dinâmicos de alta conversão.</p>
+
+                <div style={{ textAlign: 'left', marginBottom: '30px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <span style={{ color: '#eee' }}>1 Vídeo</span>
+                    <span style={{ color: '#00d2ff', fontWeight: 'bold' }}>R$ 50,00</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <span style={{ color: '#eee' }}>3 Vídeos</span>
+                    <span style={{ color: '#00d2ff', fontWeight: 'bold' }}>R$ 100,00</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <span style={{ color: '#eee' }}>5 Vídeos</span>
+                    <span style={{ color: '#00d2ff', fontWeight: 'bold' }}>R$ 150,00</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <span style={{ color: '#eee' }}>10 Vídeos</span>
+                    <span style={{ color: '#00d2ff', fontWeight: 'bold' }}>R$ 200,00</span>
+                  </div>
+                </div>
+
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ width: '100%', display: 'block', borderRadius: '12px' }}>Contratar Modelo 1</a>
               </div>
 
-              <div className="pricing-card premium">
-                <span style={{ color: '#0072FF', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Recomendado</span>
-                <h3 style={{ marginTop: '10px' }}>10 Vídeos</h3>
-                <div className="price-tag">R$ 300<span></span></div>
-                <ul className="price-features">
-                  <li>10 vídeos realistas até 15s</li>
-                  <li>Alta qualidade</li>
-                  <li>Formato para redes sociais</li>
-                  <li>Revisões incluídas</li>
-                  <li>Economia de R$ 100</li>
-                </ul>
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Contratar Agora</a>
-              </div>
+              {/* Modelo 2 Pricing Card */}
+              <div className="pricing-card" style={{ background: 'rgba(5, 10, 16, 0.4)', borderColor: 'rgba(0, 210, 255, 0.2)' }}>
+                <span style={{ color: '#888', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Modelo 2</span>
+                <h3 style={{ marginTop: '10px', fontSize: '1.8rem', color: '#fff' }}>Motion Long Form</h3>
+                <p style={{ color: '#666', marginBottom: '30px', fontSize: '0.9rem' }}>Vídeos narrativos e tutoriais com tempos estendidos.</p>
 
-              <div className="pricing-card">
-                <h3>Vídeos Longos</h3>
-                <div className="price-tag">A Combinar</div>
-                <ul className="price-features">
-                  <li>Vídeos acima de 15s</li>
-                  <li>Formatos personalizados</li>
-                  <li>Projeto sob medida</li>
-                  <li>Consultoria incluída</li>
-                </ul>
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Consultar</a>
+                <div style={{ textAlign: 'left', marginBottom: '30px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <span style={{ color: '#eee' }}>Até 30 seg</span>
+                    <span style={{ color: '#fff', fontWeight: 'bold' }}>R$ 80,00</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <span style={{ color: '#eee' }}>Até 1 minuto</span>
+                    <span style={{ color: '#fff', fontWeight: 'bold' }}>R$ 150,00</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <span style={{ color: '#eee' }}>Até 2 minutos</span>
+                    <span style={{ color: '#fff', fontWeight: 'bold' }}>R$ 250,00</span>
+                  </div>
+                </div>
+
+                <a href="https://wa.me/5522998994412" className="btn-outline" style={{ width: '100%', display: 'block', borderRadius: '12px' }}>Contratar Modelo 2</a>
               </div>
             </div>
           </div>
