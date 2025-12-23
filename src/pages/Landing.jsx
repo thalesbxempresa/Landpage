@@ -74,13 +74,12 @@ function Landing() {
         <div className="hero-glow"></div>
         <div className="container hero-grid">
           <div className="hero-text">
-            <h1>Imagens e vídeos com IA <br />para destacar sua marca</h1>
+            <h1>Sua marca no próximo nível <br />com visuais exclusivos</h1>
             <p className="lead">
               Criação de imagens realistas, vídeos curtos e estruturas digitais usando inteligência artificial para negócios e projetos digitais.
             </p>
             <div style={{ marginTop: '40px' }} className="hero-buttons">
-              <a href="#plans" className="btn-cta">Ver Pacotes</a>
-              <a href="https://wa.me/5522998994412" className="btn-outline">Falar no WhatsApp</a>
+              <a href="https://wa.me/5522998994412" className="btn-cta">Falar no WhatsApp</a>
             </div>
           </div>
 
@@ -90,7 +89,10 @@ function Landing() {
               <div className="phone-bezel">
                 <div className="phone-screen">
                   {/* Social Content Placeholder (Video/Image) */}
-                  <div className="social-media-content" style={{ backgroundImage: 'url(/assets/images/social-bg-placeholder.jpg)' }}>
+                  <div className="social-media-content" style={{
+                    background: 'linear-gradient(45deg, #12c2e9, #c471ed, #f64f59)',
+                    position: 'relative'
+                  }}>
                     <div className="video-overlay"></div>
 
                     {/* UI Overlay */}
@@ -116,15 +118,19 @@ function Landing() {
                         <span>242</span>
                       </div>
                       <div className="action-icon">
+                        <i className="fas fa-bookmark"></i>
+                        <span>Salvar</span>
+                      </div>
+                      <div className="action-icon">
                         <i className="fas fa-share"></i>
                         <span>Enviar</span>
                       </div>
                     </div>
 
                     <div className="social-ui-bottom">
-                      <p className="caption">Como escalar sua empresa usando tráfego pago em 2025? 🚀 <span className="hashtag">#marketing</span></p>
+                      <p className="caption">Transforme sua marca com inteligência artificial! 🚀 <br /><span className="hashtag">#marketing</span> <span className="hashtag">#ia</span> <span className="hashtag">#futuro</span></p>
                       <div className="audio-tag">
-                        <i className="fas fa-music"></i> <span>Áudio em Alta • Original</span>
+                        <i className="fas fa-music"></i> <span>Macaé Digital • Áudio Original</span>
                       </div>
                     </div>
                   </div>

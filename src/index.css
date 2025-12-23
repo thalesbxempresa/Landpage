@@ -71,10 +71,13 @@ h3 {
 }
 
 p.lead {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
+    /* Slightly larger for better balance with 5rem H1 */
     color: var(--text-muted);
-    max-width: 600px;
+    max-width: 580px;
+    /* Tighter measure for readability */
     line-height: 1.6;
+    margin-bottom: 30px;
 }
 
 /* Layout */
@@ -192,9 +195,11 @@ header {
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 0.9fr;
+    /* Give text slightly more space */
     align-items: center;
-    gap: 80px;
+    gap: 100px;
+    /* More breathing room */
 }
 
 /* Visual - 3D Card Effect */
@@ -1025,23 +1030,77 @@ header {
         padding: 80px 0;
     }
 
-    /* Typography */
+    /* Typography - Premium & Bold */
     h1 {
-        font-size: 2rem;
-        letter-spacing: -1px;
-        margin-bottom: 15px;
+        font-size: 2.5rem;
+        /* Larger, more impact */
+        line-height: 1.1;
+        letter-spacing: -1.5px;
+        margin-bottom: 20px;
+        background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     h2 {
-        font-size: 1.8rem;
-        line-height: 1.3;
-        margin-bottom: 20px;
+        font-size: 2rem;
+        letter-spacing: -1px;
     }
 
     p.lead {
-        font-size: 1rem;
+        font-size: 1.1rem;
         line-height: 1.6;
-        color: #ccc;
+        color: #94a3b8;
+        /* Slate-400 for premium feel */
+        margin-bottom: 30px;
+    }
+
+    /* Hero Section - Better Vertical Rhythm */
+    .hero-section {
+        padding-top: 120px;
+        /* More space from top */
+        padding-bottom: 60px;
+        text-align: center;
+        /* Center for mobile impact */
+        background: radial-gradient(circle at 50% 30%, rgba(0, 210, 255, 0.05) 0%, rgba(5, 10, 16, 0) 70%);
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        /* Better separation between text and visual */
+    }
+
+    .hero-text {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Hero Buttons - Stacked & Full Width */
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .hero-buttons .btn-cta,
+    .hero-buttons .btn-outline {
+        width: 100%;
+        display: block;
+        padding: 16px 0;
+        /* Taller touch targets */
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    /* Visual adjustments for mobile */
+    .visual-container {
+        height: 450px;
+        /* More vertical space for the phone */
+        transform: scale(1);
+        /* Full scale for impact */
+        margin-top: -20px;
+        /* Pull closer to text */
     }
 
     /* Navigation */
