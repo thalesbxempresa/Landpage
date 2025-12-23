@@ -477,35 +477,213 @@ header {
 }
 
 /* Phone Mockup Styling */
-.phone-mockup-3d {
-    width: 300px;
-    /* Standard phone width */
-    height: 600px;
+/* Abstract AI Core Animation */
+.ai-orb-container {
+    width: 320px;
+    height: 320px;
     position: relative;
-    transform: rotateY(-10deg) rotateX(5deg);
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     perspective: 1000px;
 }
 
-.phone-mockup-3d:hover {
-    transform: rotateY(0deg) rotateX(0deg);
+.ai-core {
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #fff 0%, #00d2ff 40%, #050a10 100%);
+    border-radius: 50%;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 60px rgba(0, 210, 255, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: core-pulse 4s ease-in-out infinite;
+}
+
+.core-interface i {
+    font-size: 3rem;
+    color: #fff;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    animation: float-icon 4s ease-in-out infinite;
+}
+
+/* Rings */
+.orb-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.1);
+}
+
+.ring-1 {
+    width: 180px;
+    height: 180px;
+    border-top: 2px solid #00d2ff;
+    animation: spin-right 10s linear infinite;
+}
+
+.ring-2 {
+    width: 240px;
+    height: 240px;
+    border-bottom: 2px solid #c471ed;
+    animation: spin-left 15s linear infinite;
+}
+
+.ring-3 {
+    width: 300px;
+    height: 300px;
+    border-left: 2px solid #f64f59;
+    background: rgba(255, 255, 255, 0.01);
+    animation: spin-right 20s linear infinite;
+}
+
+/* Floating Cards in Orb */
+.float-card {
+    position: absolute;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-1 {
+    top: 0;
+    right: -20px;
+    animation: float-card 6s ease-in-out infinite;
+}
+
+.card-2 {
+    bottom: 20px;
+    left: -30px;
+    animation: float-card 6s ease-in-out infinite 2s;
+}
+
+.card-3 {
+    top: 40px;
+    left: -40px;
+    animation: float-card 8s ease-in-out infinite 1s;
+}
+
+/* New Animations */
+@keyframes spin-right {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-left {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes core-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 60px rgba(0, 210, 255, 0.6);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 80px rgba(0, 210, 255, 0.8);
+    }
+}
+
+@keyframes float-icon {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes float-card {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Clean up old phone styles if needed or overwrite */
+.phone-mockup-3d,
+.phone-bezel,
+.phone-screen,
+.social-media-content {
+    display: none;
+    /* Hide old elements just in case */
+}
+
+/* Apple-Style "Breathing" Motion */
+@keyframes apple-float {
+    0% {
+        transform: translateY(0) rotateY(-2deg) rotateX(1deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotateY(2deg) rotateX(-1deg);
+    }
+
+    100% {
+        transform: translateY(0) rotateY(-2deg) rotateX(1deg);
+    }
+}
+
+/* Phone Mockup Styling - Premium Redesign */
+/* Phone Mockup Styling - Premium Redesign */
+.phone-mockup-3d {
+    width: 280px;
+    /* Slightly smaller for elegance and safety */
+    height: 580px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: apple-float 6s ease-in-out infinite;
+    /* Faster/Smoother breath */
+    margin: 0 auto;
+    /* Ensure centering */
 }
 
 .phone-bezel {
     width: 100%;
     height: 100%;
     background: #000;
-    border-radius: 40px;
-    padding: 12px;
-    /* Bezel thickness */
+    border-radius: 50px;
+    padding: 15px;
+    /* Thick premium bezel */
     box-shadow:
-        0 0 0 2px #333,
-        /* Outer metallic rim */
-        0 20px 50px rgba(0, 0, 0, 0.5),
-        /* Drop shadow */
-        inset 0 0 20px rgba(255, 255, 255, 0.1);
-    /* Inner reflection */
+        0 0 0 2px #444,
+        /* Titanium outer ring */
+        inset 0 0 0 4px #000,
+        /* Inner frame */
+        inset 0 0 20px rgba(255, 255, 255, 0.1),
+        /* Metallic sheen */
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        /* Deep shadow */
+        0 0 100px rgba(0, 210, 255, 0.1);
+    /* Ambient glow */
+    position: relative;
+    z-index: 10;
 }
 
 .phone-screen {
@@ -526,6 +704,19 @@ header {
     /* Fallback */
     position: relative;
     /* Simulate a post gradient overlay */
+}
+
+/* Dynamic Island */
+.phone-notch {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 35px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 20;
 }
 
 .video-overlay {
@@ -588,11 +779,13 @@ header {
 
 .social-ui-right {
     position: absolute;
-    bottom: 100px;
-    right: 15px;
+    bottom: 80px;
+    /* Lower slightly */
+    right: 12px;
+    /* Closer to edge */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     align-items: center;
     color: #fff;
     z-index: 10;
@@ -606,13 +799,15 @@ header {
 }
 
 .action-icon i {
-    font-size: 1.8rem;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+    font-size: 1.5rem;
+    /* Smaller, closer to native app size */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .action-icon span {
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-top: 2px;
 }
 
 .social-ui-bottom {
@@ -1038,6 +1233,7 @@ header {
         letter-spacing: -1.5px;
         margin-bottom: 20px;
         background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+        background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }

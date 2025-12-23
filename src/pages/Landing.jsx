@@ -74,9 +74,10 @@ function Landing() {
         <div className="hero-glow"></div>
         <div className="container hero-grid">
           <div className="hero-text">
-            <h1>Sua marca no próximo nível <br />com visuais exclusivos</h1>
+            <h1>O novo padrão de <br />marketing para Macaé</h1>
             <p className="lead">
-              Criação de imagens realistas, vídeos curtos e estruturas digitais usando inteligência artificial para negócios e projetos digitais.
+              A maioria das marcas locais faz "o básico". Nós criamos o <strong>extraordinário</strong>. <br />
+              Visuais de nível internacional e Inteligência Artificial para destacar sua empresa na cidade.
             </p>
             <div style={{ marginTop: '40px' }} className="hero-buttons">
               <a href="https://wa.me/5522998994412" className="btn-cta">Falar no WhatsApp</a>
@@ -84,79 +85,37 @@ function Landing() {
           </div>
 
           <div className="visual-container">
-            {/* Phone Mockup Frame */}
-            <div className="phone-mockup-3d">
-              <div className="phone-bezel">
-                <div className="phone-screen">
-                  {/* Social Content Placeholder (Video/Image) */}
-                  <div className="social-media-content" style={{
-                    background: 'linear-gradient(45deg, #12c2e9, #c471ed, #f64f59)',
-                    position: 'relative'
-                  }}>
-                    <div className="video-overlay"></div>
-
-                    {/* UI Overlay */}
-                    <div className="social-ui-top">
-                      <div className="story-bars">
-                        <div className="bar active"></div>
-                        <div className="bar"></div>
-                      </div>
-                      <div className="user-profile">
-                        <div className="avatar-circle"></div>
-                        <span className="username">macaedigital</span>
-                        <span className="time">2h</span>
-                      </div>
-                    </div>
-
-                    <div className="social-ui-right">
-                      <div className="action-icon">
-                        <i className="fas fa-heart" style={{ color: '#ff3b30' }}></i>
-                        <span>15.4K</span>
-                      </div>
-                      <div className="action-icon">
-                        <i className="fas fa-comment"></i>
-                        <span>242</span>
-                      </div>
-                      <div className="action-icon">
-                        <i className="fas fa-bookmark"></i>
-                        <span>Salvar</span>
-                      </div>
-                      <div className="action-icon">
-                        <i className="fas fa-share"></i>
-                        <span>Enviar</span>
-                      </div>
-                    </div>
-
-                    <div className="social-ui-bottom">
-                      <p className="caption">Transforme sua marca com inteligência artificial! 🚀 <br /><span className="hashtag">#marketing</span> <span className="hashtag">#ia</span> <span className="hashtag">#futuro</span></p>
-                      <div className="audio-tag">
-                        <i className="fas fa-music"></i> <span>Macaé Digital • Áudio Original</span>
-                      </div>
-                    </div>
-                  </div>
+            {/* AI Core Animation - Replacing Phone */}
+            <div className="ai-orb-container">
+              <div className="orb-ring ring-1"></div>
+              <div className="orb-ring ring-2"></div>
+              <div className="orb-ring ring-3"></div>
+              <div className="ai-core">
+                <div className="core-glow"></div>
+                <div className="core-interface">
+                  <i className="fas fa-brain"></i>
                 </div>
               </div>
 
-              {/* Floating Engagement Notifications */}
-              <div className="engagement-bubble bubble-1">
-                <i className="fas fa-heart"></i>
+              {/* Floating Elements */}
+              <div className="float-card card-1 glass">
+                <i className="fas fa-video" style={{ color: '#00d2ff' }}></i>
+                <span>Vídeo</span>
               </div>
-              <div className="engagement-bubble bubble-2">
-                <i className="fas fa-heart"></i>
+              <div className="float-card card-2 glass">
+                <i className="fas fa-image" style={{ color: '#c471ed' }}></i>
+                <span>Imagem</span>
               </div>
-              <div className="engagement-bubble bubble-3">
-                <i className="fas fa-heart"></i>
-              </div>
-
-              <div className="stat-card-floating">
-                <div className="stat-icon-small"><i className="fas fa-eye"></i></div>
-                <div className="live-views">
-                  <span className="views-count">15,482</span>
-                  <span className="views-label">Visualizações</span>
-                </div>
+              <div className="float-card card-3 glass">
+                <i className="fas fa-code" style={{ color: '#f64f59' }}></i>
+                <span>Web</span>
               </div>
             </div>
           </div>
+          <div className="engagement-bubble bubble-3">
+            <i className="fas fa-heart"></i>
+          </div>
+
         </div>
       </section>
 
@@ -191,10 +150,11 @@ function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Portfolio Sections */}
-      <section id="cases" className="section-padding" style={{ background: '#050505' }}>
+      < section id="cases" className="section-padding" style={{ background: '#050505' }
+      }>
         <div className="container">
           <div className="section-head text-left" style={{ textAlign: 'left', marginBottom: '40px' }}>
             <h2>Nossos Trabalhos</h2>
@@ -380,10 +340,10 @@ function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Pricing */}
-      <section id="plans" className="section-padding">
+      < section id="plans" className="section-padding" >
         <div className="container">
           {/* Guarantees & Payment Terms */}
           <div style={{
@@ -505,40 +465,42 @@ function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Final CTA */}
-      <section className="section-padding" style={{ background: '#050505', textAlign: 'center' }}>
+      < section className="section-padding" style={{ background: '#050505', textAlign: 'center' }}>
         <div className="container">
           <h2 style={{ marginBottom: '20px' }}>Pronto para transformar sua presença digital?</h2>
           <p className="lead" style={{ margin: '0 auto 40px', maxWidth: '600px' }}>Entre em contato e vamos construir algo extraordinário juntos.</p>
           <a href="https://wa.me/5522998994412" className="btn-cta" style={{ fontSize: '1.1rem', padding: '16px 40px' }}>Iniciar Projeto</a>
         </div>
-      </section>
+      </section >
 
       <footer style={{ padding: '50px 0', borderTop: '1px solid #111', textAlign: 'center' }}>
         <p style={{ color: '#444' }}>© 2025 Macaé Digital - Criação com inteligência artificial.</p>
       </footer>
 
       {/* Media Preview Modal */}
-      {selectedMedia && (
-        <div className="image-modal-overlay" onClick={closeMedia}>
-          <button className="close-modal" onClick={closeMedia}>&times;</button>
-          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
-            {selectedMedia.type === 'video' ? (
-              <video
-                src={selectedMedia.url}
-                controls
-                autoPlay
-                style={{ maxWidth: '100%', maxHeight: '85vh', borderRadius: '12px' }}
-              />
-            ) : (
-              <img src={selectedMedia.url} alt="Visualização" />
-            )}
+      {
+        selectedMedia && (
+          <div className="image-modal-overlay" onClick={closeMedia}>
+            <button className="close-modal" onClick={closeMedia}>&times;</button>
+            <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+              {selectedMedia.type === 'video' ? (
+                <video
+                  src={selectedMedia.url}
+                  controls
+                  autoPlay
+                  style={{ maxWidth: '100%', maxHeight: '85vh', borderRadius: '12px' }}
+                />
+              ) : (
+                <img src={selectedMedia.url} alt="Visualização" />
+              )}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 }
 
