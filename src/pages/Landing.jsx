@@ -435,32 +435,38 @@ function Landing() {
           <div>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', textAlign: 'center' }}>Desenvolvimento Digital</h3>
             <div className="card-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+              {/* Card 1: Landing Page */}
               <div className="pricing-card">
-                <h3>Landing Page</h3>
-                <div className="price-tag">R$ 1.400<span></span></div>
+                <h3>Landing Pages</h3>
+                <div className="price-tag" style={{ fontSize: '1.8rem' }}>
+                  <span style={{ fontSize: '0.9rem', display: 'block', marginBottom: '5px', opacity: 0.8, fontWeight: '400' }}>A partir de</span>
+                  R$ 497,00
+                </div>
                 <ul className="price-features">
-                  <li>Design moderno e responsivo</li>
-                  <li>Otimizada para conversão</li>
-                  <li>Integração com ferramentas</li>
-                  <li>SEO básico incluído</li>
-                  <li>Suporte pós-entrega</li>
+                  <li><i className="fas fa-check" style={{ color: '#00d2ff', marginRight: '8px' }}></i>Design focado em conversão</li>
+                  <li><i className="fas fa-check" style={{ color: '#00d2ff', marginRight: '8px' }}></i>Carregamento ultra-rápido</li>
+                  <li><i className="fas fa-check" style={{ color: '#00d2ff', marginRight: '8px' }}></i>Totalmente responsivo (Mobile)</li>
+                  <li><i className="fas fa-check" style={{ color: '#00d2ff', marginRight: '8px' }}></i>Botão de WhatsApp flutuante</li>
                 </ul>
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#333', color: '#fff' }}>Contratar</a>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}>Solicitar Orçamento</a>
               </div>
 
+              {/* Card 2: Sistemas e Apps */}
               <div className="pricing-card premium">
-                <span style={{ color: '#0072FF', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px' }}>Projeto Completo</span>
-                <h3 style={{ marginTop: '10px' }}>Sistema com Automação</h3>
-                <div className="price-tag">R$ 4.500<span></span></div>
+                <span style={{ color: '#0072FF', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px', display: 'block', marginBottom: '10px' }}>Solução Completa</span>
+                <h3 style={{ marginTop: '0' }}>Sistemas & Apps Web</h3>
+                <div className="price-tag" style={{ fontSize: '1.8rem' }}>
+                  <span style={{ fontSize: '0.9rem', display: 'block', marginBottom: '5px', opacity: 0.8, fontWeight: '400' }}>A partir de</span>
+                  R$ 1.497,00
+                </div>
                 <ul className="price-features">
-                  <li>Sistema completo personalizado</li>
-                  <li>Automações inteligentes</li>
-                  <li>Integrações avançadas</li>
-                  <li>Fluxos automatizados</li>
-                  <li>Suporte e manutenção</li>
-                  <li>Consultoria estratégica</li>
+                  <li><i className="fas fa-check" style={{ color: '#0072FF', marginRight: '8px' }}></i>Painéis Administrativos</li>
+                  <li><i className="fas fa-check" style={{ color: '#0072FF', marginRight: '8px' }}></i>Automação de Processos</li>
+                  <li><i className="fas fa-check" style={{ color: '#0072FF', marginRight: '8px' }}></i>Gestão de Clientes/Dados</li>
+                  <li><i className="fas fa-check" style={{ color: '#0072FF', marginRight: '8px' }}></i>Integração com APIs</li>
+                  <li><i className="fas fa-check" style={{ color: '#0072FF', marginRight: '8px' }}></i>Sistemas SaaS e Dashboards</li>
                 </ul>
-                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Solicitar Proposta</a>
+                <a href="https://wa.me/5522998994412" className="btn-cta" style={{ marginTop: '30px', background: '#0072FF', color: '#fff' }}>Falar com Especialista</a>
               </div>
             </div>
           </div>
