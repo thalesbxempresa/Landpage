@@ -198,29 +198,21 @@ function Landing() {
           {/* Videos Section - Modelo 1 */}
           <div style={{ marginBottom: '80px' }}>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <i className="fas fa-play-circle" style={{ color: '#00d2ff' }}></i> Portfólio - Modelos 1
+              <i className="fas fa-play-circle" style={{ color: '#00d2ff' }}></i> Vídeos longos personalizados
             </h3>
 
             {/* Price Card Model 1 (Now with Model 2 prices) */}
-            <div className="pricing-card glass" style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: '20px',
-              padding: '25px',
-              marginBottom: '30px',
-              textAlign: 'center',
-              borderRadius: '24px'
-            }}>
-              <div style={{ flex: '1', minWidth: '200px' }}>
+            {/* Price Card Model 1 */}
+            <div className="pricing-card glass pricing-grid-mobile" style={{ marginBottom: '30px', padding: '25px', borderRadius: '24px' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>1 Vídeo <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>(até 30 seg)</span></div>
                 <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 80,00</div>
               </div>
-              <div style={{ flex: '1', minWidth: '200px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>Até 1 Minuto</div>
                 <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 150,00</div>
               </div>
-              <div style={{ flex: '1', minWidth: '200px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="pricing-item-mobile" style={{ gridColumn: 'span 2' }}>
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.1rem' }}>Até 2 Minutos</div>
                 <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>R$ 250,00</div>
               </div>
@@ -249,33 +241,25 @@ function Landing() {
           {/* Videos Section - Modelo 2 */}
           <div style={{ marginBottom: '80px' }}>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <i className="fas fa-play-circle" style={{ color: '#00d2ff' }}></i> Portfólio - Modelo 2
+              <i className="fas fa-play-circle" style={{ color: '#00d2ff' }}></i> Vídeos curtos personalizados
             </h3>
 
             {/* Price Card Model 2 (Now with Model 1 prices) */}
-            <div className="pricing-card glass" style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: '20px',
-              padding: '25px',
-              marginBottom: '30px',
-              textAlign: 'center',
-              borderRadius: '24px'
-            }}>
-              <div style={{ flex: '1', minWidth: '150px' }}>
+            {/* Price Card Model 2 */}
+            <div className="pricing-card glass pricing-grid-mobile" style={{ marginBottom: '30px', padding: '25px', borderRadius: '24px' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>1 Vídeo</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 50,00</div>
               </div>
-              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>3 Vídeos</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 100,00</div>
               </div>
-              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>5 Vídeos</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 150,00</div>
               </div>
-              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>10 Vídeos</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 200,00</div>
               </div>
@@ -304,33 +288,25 @@ function Landing() {
           {/* AI Arts Section (Geral) */}
           <div style={{ marginBottom: '80px' }}>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <i className="fas fa-magic" style={{ color: '#00d2ff' }}></i> Artes com IA (Visual Geral)
+              <i className="fas fa-magic" style={{ color: '#00d2ff' }}></i> Imagens totalmente personalizadas com sua identidade
             </h3>
 
             {/* Price Card Images */}
-            <div className="pricing-card glass" style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: '20px',
-              padding: '25px',
-              marginBottom: '30px',
-              textAlign: 'center',
-              borderRadius: '24px'
-            }}>
-              <div style={{ flex: '1', minWidth: '150px' }}>
+            {/* Price Card Images */}
+            <div className="pricing-card glass pricing-grid-mobile" style={{ marginBottom: '30px', padding: '25px', borderRadius: '24px' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>5 Imagens</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 50,00</div>
               </div>
-              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>10 Imagens</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 80,00</div>
               </div>
-              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>20 Imagens</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>R$ 200,00</div>
               </div>
-              <div style={{ flex: '1', minWidth: '150px', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="pricing-item-mobile">
                 <div style={{ color: '#00d2ff', fontWeight: '700', fontSize: '1.2rem' }}>Personalizado</div>
                 <div style={{ fontSize: '1.1rem', opacity: 0.9 }}>A Combinar</div>
               </div>
@@ -355,8 +331,9 @@ function Landing() {
           {/* Sites Section */}
           <div style={{ marginBottom: '80px' }}>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <i className="fas fa-desktop" style={{ color: '#00d2ff' }}></i> Amostras de Sites (Lançamentos e SaaS)
+              <i className="fas fa-desktop" style={{ color: '#00d2ff' }}></i> Criação de site profissional
             </h3>
+            <p style={{ color: '#ccc', marginBottom: '20px', fontSize: '1rem' }}>Totalmente personalizado</p>
             <div className="portfolio-scroll">
               {portfolioItems.filter(item => item.type !== 'video' && item.section === 'Sites').length > 0 ? (
                 portfolioItems.filter(item => item.type !== 'video' && item.section === 'Sites').map((item) => {
@@ -377,8 +354,9 @@ function Landing() {
           {/* Apps Section */}
           <div style={{ marginBottom: '60px' }}>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <i className="fas fa-mobile-alt" style={{ color: '#00d2ff' }}></i> Amostras de Aplicativos (UI/UX)
+              <i className="fas fa-mobile-alt" style={{ color: '#00d2ff' }}></i> Criação de aplicativo profissional
             </h3>
+            <p style={{ color: '#ccc', marginBottom: '20px', fontSize: '1rem' }}>Totalmente personalizado</p>
             <div className="portfolio-scroll">
               {portfolioItems.filter(item => item.type !== 'video' && item.section === 'Aplicativos').length > 0 ? (
                 portfolioItems.filter(item => item.type !== 'video' && item.section === 'Aplicativos').map((item) => {

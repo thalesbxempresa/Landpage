@@ -748,7 +748,7 @@ function Admin() {
                         <div style={{ marginBottom: '60px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
                                 <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
-                                    <i className="fas fa-play-circle"></i> Vídeos - Modelo 1
+                                    <i className="fas fa-play-circle"></i> Vídeos longos personalizados
                                 </h2>
                                 <button
                                     onClick={() => openCloudinaryWidget('Modelo 1')}
@@ -768,7 +768,7 @@ function Admin() {
                                     onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.2)'}
                                     onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.1)'}
                                 >
-                                    <i className="fas fa-upload"></i> Upload para Modelo 1
+                                    <i className="fas fa-upload"></i> Upload para Vídeos Longos
                                 </button>
                             </div>
                             <SortableContext id="Modelo 1" items={[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 1').map(item => item.id)} strategy={rectSortingStrategy}>
@@ -790,7 +790,7 @@ function Admin() {
                                         ))}
                                         {[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 1').length === 0 && (
                                             <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: '#444' }}>
-                                                Arraste vídeos aqui para Modelo 1
+                                                Arraste vídeos aqui para Vídeos Longos
                                             </div>
                                         )}
                                     </div>
@@ -802,7 +802,7 @@ function Admin() {
                         <div style={{ marginBottom: '80px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
                                 <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
-                                    <i className="fas fa-play-circle"></i> Vídeos - Modelo 2
+                                    <i className="fas fa-play-circle"></i> Vídeos curtos personalizados
                                 </h2>
                                 <button
                                     onClick={() => openCloudinaryWidget('Modelo 2')}
@@ -822,7 +822,7 @@ function Admin() {
                                     onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.2)'}
                                     onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0, 210, 255, 0.1)'}
                                 >
-                                    <i className="fas fa-upload"></i> Upload para Modelo 2
+                                    <i className="fas fa-upload"></i> Upload para Vídeos Curtos
                                 </button>
                             </div>
                             <SortableContext id="Modelo 2" items={[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 2').map(item => item.id)} strategy={rectSortingStrategy}>
@@ -844,7 +844,7 @@ function Admin() {
                                         ))}
                                         {[...portfolioItems, ...pendingItems].filter(item => item.type === 'video' && item.section === 'Modelo 2').length === 0 && (
                                             <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: '#444' }}>
-                                                Arraste vídeos aqui para Modelo 2
+                                                Arraste vídeos aqui para Vídeos Curtos
                                             </div>
                                         )}
                                     </div>
@@ -862,7 +862,7 @@ function Admin() {
                         <div style={{ marginBottom: '60px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
                                 <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
-                                    <i className="fas fa-images"></i> Outras Imagens (Geral)
+                                    <i className="fas fa-images"></i> Imagens totalmente personalizadas com sua identidade
                                 </h2>
                                 <button
                                     onClick={() => openCloudinaryWidget('Geral')}
@@ -916,7 +916,7 @@ function Admin() {
                         <div style={{ marginBottom: '60px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
                                 <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
-                                    <i className="fas fa-desktop"></i> Amostras de Sites
+                                    <i className="fas fa-desktop"></i> Criação de site profissional
                                 </h2>
                                 <button
                                     onClick={() => openCloudinaryWidget('Sites')}
@@ -970,7 +970,7 @@ function Admin() {
                         <div style={{ marginBottom: '60px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
                                 <h2 style={{ fontSize: '1.5rem', margin: 0, display: 'flex', alignItems: 'center', gap: '15px', color: '#00d2ff' }}>
-                                    <i className="fas fa-mobile-alt"></i> Amostras de Aplicativos
+                                    <i className="fas fa-mobile-alt"></i> Criação de aplicativo profissional
                                 </h2>
                                 <button
                                     onClick={() => openCloudinaryWidget('Aplicativos')}
